@@ -1,0 +1,36 @@
+Package: scexample
+Title: A skeleton implementation of sc (Sykdomspulsen Core)
+Version: 2021.7.6
+Authors@R: c(
+  person(
+    given = "Richard",
+    family = "White",
+    role = c("aut", "cre"),
+    email = "hello@rwhite.no",
+    comment = c(ORCID = "0000-0002-6747-1726")
+  )
+  )
+Description: A skeleton implementation of sc (Sykdomspulsen Core)
+License: MIT + file LICENSE
+URL: https://sykdomspulsen-dokumentasjon.no
+BugReports: https://github.com/folkehelseinstituttet/sc/issues
+Depends:
+    R (>= 4.1.0)
+Imports:
+    data.table,
+    dplyr,
+    fhidata,
+    fs,
+    ggplot2,
+    magrittr,
+    rmarkdown,
+    sc (>= 8.0.1)
+Suggests: 
+    knitr,
+    testthat,
+    usethis
+VignetteBuilder: 
+    knitr
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
