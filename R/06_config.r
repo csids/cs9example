@@ -1,3 +1,19 @@
+# ******************************************************************************
+# ******************************************************************************
+#
+# 06_config.r
+#
+# PURPOSE 1:
+#   Call all the functions defined in 01, 02, 03, 04, and 05 in the correct order.
+#
+# PURPOSE 2:
+#   Set all necessary configs that do not belong anywhere else.
+#
+#   E.g. Formatting for progress bars.
+#
+# ******************************************************************************
+# ******************************************************************************
+
 set_config <- function() {
   # 01_definitions.r
   set_definitions()

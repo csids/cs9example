@@ -1,3 +1,17 @@
+# ******************************************************************************
+# ******************************************************************************
+#
+# 07_onLoad.r
+#
+# PURPOSE 1:
+#   Initializing everything that happens when the package is loaded.
+#
+#   E.g. Calling bash scripts that authenticate against Kerebros, setting the
+#   configs as defined in 06_config.r.
+#
+# ******************************************************************************
+# ******************************************************************************
+
 .onLoad <- function(libname, pkgname) {
   # Mechanism to authenticate as necessary (e.g. Kerebros)
   try(system2("/bin/authenticate.sh", stdout = NULL), TRUE)

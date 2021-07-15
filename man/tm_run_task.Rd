@@ -15,5 +15,9 @@ tm_run_task(task_name, index_plan = NULL, index_analysis = NULL)
 }
 \description{
 This task is needed to ensure that all the definitions/db schemas/tasks/etc
-are loaded from the package scexample.
+are loaded from the package scexample. We cannot run sc::tm_run_task directly,
+because we need to load all of the database connections, db schemas, tasks,
+etc. *before* we run the task. Hence, this wrapper ensures that all of this
+package's configs files are loaded via OURPACKAGE::.onLoad() first, and then
+sc::tm_run_task can run.
 }
