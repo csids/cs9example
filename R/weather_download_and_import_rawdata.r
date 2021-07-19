@@ -77,7 +77,6 @@ weather_download_and_import_rawdata_action <- function(data, argset, schema) {
   # res
 
   # put data in db table
-  sc::fill_in_missing_v8(res, border = config$border)
   schema$anon_example_weather_rawdata$insert_data(res)
 
   # special case that runs after everything
