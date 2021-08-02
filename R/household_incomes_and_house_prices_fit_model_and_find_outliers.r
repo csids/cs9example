@@ -179,8 +179,8 @@ household_incomes_and_house_prices_fit_model_and_find_outliers_data_selector = f
       # calmonth,
       # calyearmonth,
 
-      new_house_price_per_m2_nok,
-      used_house_price_per_m2_nok
+      new_house_price_per_m2_nok
+      # used_house_price_per_m2_nok
     ) %>%
     dplyr::collect() %>%
     as.data.table() %>%
