@@ -98,4 +98,87 @@ set_tasks <- function() {
     ),
     info = "This task ploduces plots"
   )
+
+  ## > household_incomes_and_house_prices_import_data ----
+  # tm_run_task("household_incomes_and_house_prices_import_data")
+  sc::add_task_from_config_v8(
+    name_grouping = "household_incomes_and_house_prices",
+    name_action = "import_data",
+    name_variant = NULL,
+    cores = 1,
+    plan_analysis_fn_name = NULL,
+    for_each_plan = plnr::expand_list(
+      x = 1
+    ),
+    for_each_analysis = NULL,
+    universal_argset = NULL,
+    upsert_at_end_of_each_plan = FALSE,
+    insert_at_end_of_each_plan = FALSE,
+    action_fn_name = "scexample::household_incomes_and_house_prices_import_data_action",
+    data_selector_fn_name = "scexample::household_incomes_and_house_prices_import_data_data_selector",
+    schema = list(
+      # input
+
+      # output
+      "anon_example_income" = sc::config$schemas$anon_example_income,
+      "anon_example_house_prices" = sc::config$schemas$anon_example_house_prices
+    ),
+    info = "This task downloads and cleans the raw data and aggregates it to county and national level"
+  )
+
+  ## > household_incomes_and_house_prices_fit_model_and_find_outliers ----
+  # tm_run_task("household_incomes_and_house_prices_fit_model_and_find_outliers")
+  sc::add_task_from_config_v8(
+    name_grouping = "household_incomes_and_house_prices",
+    name_action = "fit_model_and_find_outliers",
+    name_variant = NULL,
+    cores = 1,
+    plan_analysis_fn_name = NULL,
+    for_each_plan = plnr::expand_list(
+      x = 1
+    ),
+    for_each_analysis = NULL,
+    universal_argset = NULL,
+    upsert_at_end_of_each_plan = FALSE,
+    insert_at_end_of_each_plan = FALSE,
+    action_fn_name = "scexample::household_incomes_and_house_prices_fit_model_and_find_outliers_action",
+    data_selector_fn_name = "scexample::household_incomes_and_house_prices_fit_model_and_find_outliers_data_selector",
+    schema = list(
+      # input
+      "anon_example_income" = sc::config$schemas$anon_example_income,
+      "anon_example_house_prices" = sc::config$schemas$anon_example_house_prices,
+
+      # output
+      "anon_example_house_prices_outliers_after_adjusting_for_income" = sc::config$schemas$anon_example_house_prices_outliers_after_adjusting_for_income
+    ),
+    info = "This task downloads and cleans the raw data and aggregates it to county and national level"
+  )
+
+  ## > household_incomes_and_house_prices_plot ----
+  # tm_run_task("household_incomes_and_house_prices_fit_model_and_find_outliers")
+  sc::add_task_from_config_v8(
+    name_grouping = "household_incomes_and_house_prices",
+    name_action = "plot",
+    name_variant = NULL,
+    cores = 1,
+    plan_analysis_fn_name = NULL,
+    for_each_plan = plnr::expand_list(
+      x = 1
+    ),
+    for_each_analysis = NULL,
+    universal_argset = NULL,
+    upsert_at_end_of_each_plan = FALSE,
+    insert_at_end_of_each_plan = FALSE,
+    action_fn_name = "scexample::household_incomes_and_house_prices_fit_model_and_find_outliers_action",
+    data_selector_fn_name = "scexample::household_incomes_and_house_prices_fit_model_and_find_outliers_data_selector",
+    schema = list(
+      # input
+      "anon_example_income" = sc::config$schemas$anon_example_income,
+      "anon_example_house_prices" = sc::config$schemas$anon_example_house_prices,
+
+      # output
+      "anon_example_house_prices_outliers_after_adjusting_for_income" = sc::config$schemas$anon_example_house_prices_outliers_after_adjusting_for_income
+    ),
+    info = "This task downloads and cleans the raw data and aggregates it to county and national level"
+  )
 }

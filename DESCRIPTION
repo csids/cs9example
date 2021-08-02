@@ -21,10 +21,13 @@ Imports:
     dplyr,
     fhidata,
     fs,
+    janitor,
     ggplot2,
     magrittr,
+    merTools,
     rmarkdown,
-    sc (>= 8.0.1)
+    sc (>= 8.0.1),
+    tidyr
 Suggests: 
     knitr,
     testthat,
