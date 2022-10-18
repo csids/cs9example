@@ -5,7 +5,7 @@
 #' @param schema DB Schema
 #' @export
 weather_download_and_import_rawdata_action <- function(data, argset, schema) {
-  # tm_run_task("weather_download_and_import_rawdata")
+  # sc::tm_run_task("weather_download_and_import_rawdata", run_as_rstudio_job_loading_from_devtools = TRUE)
 
   if (plnr::is_run_directly()) {
     # sc::tm_get_plans_argsets_as_dt("weather_download_and_import_rawdata")
@@ -23,39 +23,34 @@ weather_download_and_import_rawdata_action <- function(data, argset, schema) {
 
   }
 
-  a <- data$data
+  a <- data$data$properties$timeseries
+  res <- vector("list", length=length(a) - 1)
+  for(i in seq_along(res)){
+    # i = 1
+    time_from <- a[[i]]$time
+    if("next_1_hours" %in% names(a[[i]]$data)){
+      time_var <- "next_1_hours"
+    } else {
+      time_var <- "next_6_hours"
+    }
+    temp <- a[[i]]$data[["instant"]]$details$air_temperature
+    precip <- a[[i]]$data[[time_var]]$details$precipitation_amount
 
-  baz <- xml2::xml_find_all(a, ".//maxTemperature")
-  res <- vector("list", length = length(baz))
-  for (i in seq_along(baz)) {
-    parent <- xml2::xml_parent(baz[[i]])
-    grandparent <- xml2::xml_parent(parent)
-    time_from <- xml2::xml_attr(grandparent, "from")
-    time_to <- xml2::xml_attr(grandparent, "to")
-    x <- xml2::xml_find_all(parent, ".//minTemperature")
-    temp_min <- xml2::xml_attr(x, "value")
-    x <- xml2::xml_find_all(parent, ".//maxTemperature")
-    temp_max <- xml2::xml_attr(x, "value")
-    x <- xml2::xml_find_all(parent, ".//precipitation")
-    precip <- xml2::xml_attr(x, "value")
     res[[i]] <- data.frame(
       time_from = as.character(time_from),
-      time_to = as.character(time_to),
-      temp_max = as.numeric(temp_max),
-      temp_min = as.numeric(temp_min),
+      temp = as.numeric(temp),
       precip = as.numeric(precip)
     )
   }
+
   res <- rbindlist(res)
   res <- res[stringr::str_sub(time_from, 12, 13) %in% c("00", "06", "12", "18")]
   res[, date := as.Date(stringr::str_sub(time_from, 1, 10))]
-  res[, N := .N, by = date]
-  res <- res[N == 4]
   res <- res[
     ,
     .(
-      temp_max = max(temp_max),
-      temp_min = min(temp_min),
+      temp_max = max(temp),
+      temp_min = min(temp),
       precip = sum(precip)
     ),
     keyby = .(date)
@@ -107,8 +102,8 @@ weather_download_and_import_rawdata_data_selector <- function(argset, schema) {
   )]
 
   # download the forecast for the specified location_code
-  d <- httr::GET(glue::glue("https://api.met.no/weatherapi/locationforecast/2.0/classic?lat={gps$lat}&lon={gps$long}"), httr::content_type_xml())
-  d <- xml2::read_xml(d$content)
+  d <- httr::GET(glue::glue("https://api.met.no/weatherapi/locationforecast/2.0/complete?lat={gps$lat}&lon={gps$long}"))
+  d <- httr::content(d)
 
   # The variable returned must be a named list
   retval <- list(
