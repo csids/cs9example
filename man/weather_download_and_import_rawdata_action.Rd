@@ -4,14 +4,14 @@
 \alias{weather_download_and_import_rawdata_action}
 \title{weather_download_and_import_rawdata (action)}
 \usage{
-weather_download_and_import_rawdata_action(data, argset, schema)
+weather_download_and_import_rawdata_action(data, argset, tables)
 }
 \arguments{
 \item{data}{Data}
 
 \item{argset}{Argset}
 
-\item{schema}{DB Schema}
+\item{tables}{DB tables}
 }
 \description{
 weather_download_and_import_rawdata (action)

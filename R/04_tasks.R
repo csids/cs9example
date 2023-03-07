@@ -31,8 +31,8 @@ set_tasks <- function() {
     universal_argset = NULL,
     upsert_at_end_of_each_plan = FALSE,
     insert_at_end_of_each_plan = FALSE,
-    action_fn_name = "scexample::weather_download_and_import_rawdata_action",
-    data_selector_fn_name = "scexample::weather_download_and_import_rawdata_data_selector",
+    action_fn_name = "sc9example::weather_download_and_import_rawdata_action",
+    data_selector_fn_name = "sc9example::weather_download_and_import_rawdata_data_selector",
     tables = list(
       # input
 
@@ -56,8 +56,8 @@ set_tasks <- function() {
     universal_argset = NULL,
     upsert_at_end_of_each_plan = FALSE,
     insert_at_end_of_each_plan = FALSE,
-    action_fn_name = "scexample::weather_clean_data_action",
-    data_selector_fn_name = "scexample::weather_clean_data_data_selector",
+    action_fn_name = "sc9example::weather_clean_data_action",
+    data_selector_fn_name = "sc9example::weather_clean_data_data_selector",
     tables = list(
       # input
       "anon_example_weather_rawdata" = global$ss$tables$anon_example_weather_rawdata,
@@ -86,93 +86,13 @@ set_tasks <- function() {
     ),
     upsert_at_end_of_each_plan = FALSE,
     insert_at_end_of_each_plan = FALSE,
-    action_fn_name = "scexample::weather_export_plots_action",
-    data_selector_fn_name = "scexample::weather_export_plots_data_selector",
+    action_fn_name = "sc9example::weather_export_plots_action",
+    data_selector_fn_name = "sc9example::weather_export_plots_data_selector",
     tables = list(
       # input
       "anon_example_weather_data" = global$ss$tables$anon_example_weather_data
 
       # output
-    )
-  )
-
-  ## > household_incomes_and_house_prices_import_data ----
-  # tm_run_task("household_incomes_and_house_prices_import_data")
-  global$ss$add_task(
-    name_grouping = "household_incomes_and_house_prices",
-    name_action = "import_data",
-    name_variant = NULL,
-    cores = 1,
-    plan_analysis_fn_name = NULL,
-    for_each_plan = plnr::expand_list(
-      x = 1
-    ),
-    for_each_analysis = NULL,
-    universal_argset = NULL,
-    upsert_at_end_of_each_plan = FALSE,
-    insert_at_end_of_each_plan = FALSE,
-    action_fn_name = "scexample::household_incomes_and_house_prices_import_data_action",
-    data_selector_fn_name = "scexample::household_incomes_and_house_prices_import_data_data_selector",
-    tables = list(
-      # input
-
-      # output
-      "anon_example_income" = global$ss$tables$anon_example_income,
-      "anon_example_house_prices" = global$ss$tables$anon_example_house_prices
-    )
-  )
-
-  ## > household_incomes_and_house_prices_fit_model_and_find_outliers ----
-  # tm_run_task("household_incomes_and_house_prices_fit_model_and_find_outliers")
-  global$ss$add_task(
-    name_grouping = "household_incomes_and_house_prices",
-    name_action = "fit_model_and_find_outliers",
-    name_variant = NULL,
-    cores = 1,
-    plan_analysis_fn_name = NULL,
-    for_each_plan = plnr::expand_list(
-      x = 1
-    ),
-    for_each_analysis = NULL,
-    universal_argset = NULL,
-    upsert_at_end_of_each_plan = FALSE,
-    insert_at_end_of_each_plan = FALSE,
-    action_fn_name = "scexample::household_incomes_and_house_prices_fit_model_and_find_outliers_action",
-    data_selector_fn_name = "scexample::household_incomes_and_house_prices_fit_model_and_find_outliers_data_selector",
-    tables = list(
-      # input
-      "anon_example_income" = global$ss$tables$anon_example_income,
-      "anon_example_house_prices" = global$ss$tables$anon_example_house_prices,
-
-      # output
-      "anon_example_house_prices_outliers_after_adjusting_for_income" = global$ss$tables$anon_example_house_prices_outliers_after_adjusting_for_income
-    )
-  )
-
-  ## > household_incomes_and_house_prices_plot ----
-  # tm_run_task("household_incomes_and_house_prices_fit_model_and_find_outliers")
-  global$ss$add_task(
-    name_grouping = "household_incomes_and_house_prices",
-    name_action = "plot",
-    name_variant = NULL,
-    cores = 1,
-    plan_analysis_fn_name = NULL,
-    for_each_plan = plnr::expand_list(
-      x = 1
-    ),
-    for_each_analysis = NULL,
-    universal_argset = NULL,
-    upsert_at_end_of_each_plan = FALSE,
-    insert_at_end_of_each_plan = FALSE,
-    action_fn_name = "scexample::household_incomes_and_house_prices_fit_model_and_find_outliers_action",
-    data_selector_fn_name = "scexample::household_incomes_and_house_prices_fit_model_and_find_outliers_data_selector",
-    tables = list(
-      # input
-      "anon_example_income" = global$ss$tables$anon_example_income,
-      "anon_example_house_prices" = global$ss$tables$anon_example_house_prices,
-
-      # output
-      "anon_example_house_prices_outliers_after_adjusting_for_income" = global$ss$tables$anon_example_house_prices_outliers_after_adjusting_for_income
     )
   )
 }

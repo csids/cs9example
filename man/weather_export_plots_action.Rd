@@ -4,14 +4,14 @@
 \alias{weather_export_plots_action}
 \title{weather_export_plots (action)}
 \usage{
-weather_export_plots_action(data, argset, schema)
+weather_export_plots_action(data, argset, tables)
 }
 \arguments{
 \item{data}{Data}
 
 \item{argset}{Argset}
 
-\item{schema}{DB Schema}
+\item{tables}{DB tables}
 }
 \description{
 weather_export_plots (action)

@@ -4,12 +4,12 @@
 \alias{weather_download_and_import_rawdata_data_selector}
 \title{weather_download_and_import_rawdata (data selector)}
 \usage{
-weather_download_and_import_rawdata_data_selector(argset, schema)
+weather_download_and_import_rawdata_data_selector(argset, tables)
 }
 \arguments{
 \item{argset}{Argset}
 
-\item{schema}{DB Schema}
+\item{tables}{DB tables}
 }
 \description{
 weather_download_and_import_rawdata (data selector)

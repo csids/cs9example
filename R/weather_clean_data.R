@@ -6,7 +6,7 @@
 #' @export
 weather_clean_data_action <- function(data, argset, tables) {
   # sc9::run_task_sequentially_as_rstudio_job_loading_from_devtools("weather_clean_data")
-  # To be run outside of rstudio: scexample::global$ss$run_task("weather_clean_data")
+  # To be run outside of rstudio: sc9example::global$ss$run_task("weather_clean_data")
 
 
   if (plnr::is_run_directly()) {

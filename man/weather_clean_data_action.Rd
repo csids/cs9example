@@ -4,14 +4,14 @@
 \alias{weather_clean_data_action}
 \title{weather_clean_data (action)}
 \usage{
-weather_clean_data_action(data, argset, schema)
+weather_clean_data_action(data, argset, tables)
 }
 \arguments{
 \item{data}{Data}
 
 \item{argset}{Argset}
 
-\item{schema}{DB Schema}
+\item{tables}{DB tables}
 }
 \description{
 weather_clean_data (action)

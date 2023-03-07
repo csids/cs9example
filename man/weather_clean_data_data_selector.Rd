@@ -4,12 +4,12 @@
 \alias{weather_clean_data_data_selector}
 \title{weather_clean_data (data selector)}
 \usage{
-weather_clean_data_data_selector(argset, schema)
+weather_clean_data_data_selector(argset, tables)
 }
 \arguments{
 \item{argset}{Argset}
 
-\item{schema}{DB Schema}
+\item{tables}{DB tables}
 }
 \description{
 weather_clean_data (data selector)

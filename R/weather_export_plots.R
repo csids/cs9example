@@ -6,7 +6,7 @@
 #' @export
 weather_export_plots_action <- function(data, argset, tables) {
   # sc9::run_task_sequentially_as_rstudio_job_loading_from_devtools("weather_export_plots")
-  # To be run outside of rstudio: scexample::global$ss$run_task("weather_export_plots")
+  # To be run outside of rstudio: sc9example::global$ss$run_task("weather_export_plots")
 
   if(plnr::is_run_directly()){
     # global$ss$shortcut_get_plans_argsets_as_dt("weather_export_plots")

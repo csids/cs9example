@@ -4,12 +4,12 @@
 \alias{weather_export_plots_data_selector}
 \title{weather_export_plots (data selector)}
 \usage{
-weather_export_plots_data_selector(argset, schema)
+weather_export_plots_data_selector(argset, tables)
 }
 \arguments{
 \item{argset}{Argset}
 
-\item{schema}{DB Schema}
+\item{tables}{DB tables}
 }
 \description{
 weather_export_plots (data selector)

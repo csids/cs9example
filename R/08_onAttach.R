@@ -11,12 +11,12 @@
 
 .onAttach <- function(libname, pkgname) {
   version <- tryCatch(
-    utils::packageDescription("scexample", fields = "Version"),
+    utils::packageDescription("sc9example", fields = "Version"),
     warning = function(w){
       1
     }
   )
 
-  packageStartupMessage(paste0("scexample ",version))
+  packageStartupMessage(paste0("sc9example ",version))
   packageStartupMessage(paste0("sc9 ",utils::packageDescription("sc9", fields = "Version")))
 }
