@@ -1,26 +1,22 @@
 # ******************************************************************************
 # ******************************************************************************
 #
-# 03_db_schemas.r
+# 03_db_tables.R
 #
 # PURPOSE 1:
-#   Set db schemas that are used throughout the package.
-#
-#   These are basically all of the database tables that you will be writing to,
-#   and reading from.
+#   Set db tables that are used throughout the package.
 #
 # ******************************************************************************
 # ******************************************************************************
 
-set_db_schemas <- function() {
+set_db_tables <- function() {
   # __________ ----
   # Weather  ----
   ## > anon_example_weather_rawdata ----
-  sc::add_schema_v8(
+  global$ss$add_table(
     name_access = c("anon"),
     name_grouping = "example_weather",
     name_variant = "rawdata",
-    db_configs = sc::config$db_configs,
     field_types =  c(
       "granularity_time" = "TEXT",
       "granularity_geo" = "TEXT",
@@ -29,8 +25,6 @@ set_db_schemas <- function() {
       "border" = "INTEGER",
       "age" = "TEXT",
       "sex" = "TEXT",
-
-      "date" = "DATE",
 
       "isoyear" = "INTEGER",
       "isoweek" = "INTEGER",
@@ -41,6 +35,8 @@ set_db_schemas <- function() {
       "calyear" = "INTEGER",
       "calmonth" = "INTEGER",
       "calyearmonth" = "TEXT",
+
+      "date" = "DATE",
 
       "temp_max" = "DOUBLE",
       "temp_min" = "DOUBLE",
@@ -53,22 +49,15 @@ set_db_schemas <- function() {
       "age",
       "sex"
     ),
-    censors = list(
-      anon = list(
-
-      )
-    ),
-    validator_field_types = sc::validator_field_types_sykdomspulsen,
-    validator_field_contents = sc::validator_field_contents_sykdomspulsen,
-    info = "This db table is used for..."
+    validator_field_types = csdb::validator_field_types_csfmt_rts_data_v1,
+    validator_field_contents = csdb::validator_field_contents_csfmt_rts_data_v1
   )
 
   ## > anon_example_weather_data ----
-  sc::add_schema_v8(
+  global$ss$add_table(
     name_access = c("anon"),
     name_grouping = "example_weather",
     name_variant = "data",
-    db_configs = sc::config$db_configs,
     field_types =  c(
       "granularity_time" = "TEXT",
       "granularity_geo" = "TEXT",
@@ -77,8 +66,6 @@ set_db_schemas <- function() {
       "border" = "INTEGER",
       "age" = "TEXT",
       "sex" = "TEXT",
-
-      "date" = "DATE",
 
       "isoyear" = "INTEGER",
       "isoweek" = "INTEGER",
@@ -89,6 +76,8 @@ set_db_schemas <- function() {
       "calyear" = "INTEGER",
       "calmonth" = "INTEGER",
       "calyearmonth" = "TEXT",
+
+      "date" = "DATE",
 
       "temp_max" = "DOUBLE",
       "temp_min" = "DOUBLE",
@@ -101,22 +90,15 @@ set_db_schemas <- function() {
       "age",
       "sex"
     ),
-    censors = list(
-      anon = list(
-
-      )
-    ),
-    validator_field_types = sc::validator_field_types_sykdomspulsen,
-    validator_field_contents = sc::validator_field_contents_sykdomspulsen,
-    info = "This db table is used for..."
+    validator_field_types = csdb::validator_field_types_csfmt_rts_data_v1,
+    validator_field_contents = csdb::validator_field_contents_csfmt_rts_data_v1
   )
 
   ## > anon_example_income ----
-  sc::add_schema_v8(
+  global$ss$add_table(
     name_access = c("anon"),
     name_grouping = "example_income",
     name_variant = NULL,
-    db_configs = sc::config$db_configs,
     field_types =  c(
       "granularity_time" = "TEXT",
       "granularity_geo" = "TEXT",
@@ -125,8 +107,6 @@ set_db_schemas <- function() {
       "border" = "INTEGER",
       "age" = "TEXT",
       "sex" = "TEXT",
-
-      "date" = "DATE",
 
       "isoyear" = "INTEGER",
       "isoweek" = "INTEGER",
@@ -137,6 +117,8 @@ set_db_schemas <- function() {
       "calyear" = "INTEGER",
       "calmonth" = "INTEGER",
       "calyearmonth" = "TEXT",
+
+      "date" = "DATE",
 
       "household_income_median_all_households_nok" = "DOUBLE",
       "household_income_median_singles_nok" = "DOUBLE",
@@ -151,22 +133,15 @@ set_db_schemas <- function() {
       "age",
       "sex"
     ),
-    censors = list(
-      anon = list(
-
-      )
-    ),
-    validator_field_types = sc::validator_field_types_sykdomspulsen,
-    validator_field_contents = sc::validator_field_contents_sykdomspulsen,
-    info = "This db table is used for..."
+    validator_field_types = csdb::validator_field_types_csfmt_rts_data_v1,
+    validator_field_contents = csdb::validator_field_contents_csfmt_rts_data_v1
   )
 
   ## > anon_example_house_prices ----
-  sc::add_schema_v8(
+  global$ss$add_table(
     name_access = c("anon"),
     name_grouping = "example_house_prices",
     name_variant = NULL,
-    db_configs = sc::config$db_configs,
     field_types =  c(
       "granularity_time" = "TEXT",
       "granularity_geo" = "TEXT",
@@ -175,8 +150,6 @@ set_db_schemas <- function() {
       "border" = "INTEGER",
       "age" = "TEXT",
       "sex" = "TEXT",
-
-      "date" = "DATE",
 
       "isoyear" = "INTEGER",
       "isoweek" = "INTEGER",
@@ -187,6 +160,8 @@ set_db_schemas <- function() {
       "calyear" = "INTEGER",
       "calmonth" = "INTEGER",
       "calyearmonth" = "TEXT",
+
+      "date" = "DATE",
 
       "new_house_price_per_m2_nok" = "DOUBLE",
       "used_house_price_per_m2_nok" = "DOUBLE"
@@ -198,22 +173,15 @@ set_db_schemas <- function() {
       "age",
       "sex"
     ),
-    censors = list(
-      anon = list(
-
-      )
-    ),
-    validator_field_types = sc::validator_field_types_sykdomspulsen,
-    validator_field_contents = sc::validator_field_contents_sykdomspulsen,
-    info = "This db table is used for..."
+    validator_field_types = csdb::validator_field_types_csfmt_rts_data_v1,
+    validator_field_contents = csdb::validator_field_contents_csfmt_rts_data_v1
   )
 
   ## > anon_example_house_prices_outliers_after_adjusting_for_income ----
-  sc::add_schema_v8(
+  global$ss$add_table(
     name_access = c("anon"),
     name_grouping = "example_house_prices",
     name_variant = "outliers_after_adjusting_for_income",
-    db_configs = sc::config$db_configs,
     field_types =  c(
       "granularity_time" = "TEXT",
       "granularity_geo" = "TEXT",
@@ -222,8 +190,6 @@ set_db_schemas <- function() {
       "border" = "INTEGER",
       "age" = "TEXT",
       "sex" = "TEXT",
-
-      "date" = "DATE",
 
       "isoyear" = "INTEGER",
       "isoweek" = "INTEGER",
@@ -234,6 +200,8 @@ set_db_schemas <- function() {
       "calyear" = "INTEGER",
       "calmonth" = "INTEGER",
       "calyearmonth" = "TEXT",
+
+      "date" = "DATE",
 
       "household_income_median_all_households_nok" = "DOUBLE",
 
@@ -250,13 +218,7 @@ set_db_schemas <- function() {
       "age",
       "sex"
     ),
-    censors = list(
-      anon = list(
-
-      )
-    ),
-    validator_field_types = sc::validator_field_types_sykdomspulsen,
-    validator_field_contents = sc::validator_field_contents_sykdomspulsen,
-    info = "This db table is used for..."
+    validator_field_types = csdb::validator_field_types_csfmt_rts_data_v1,
+    validator_field_contents = csdb::validator_field_contents_csfmt_rts_data_v1
   )
 }

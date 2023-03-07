@@ -1,7 +1,7 @@
 # ******************************************************************************
 # ******************************************************************************
 #
-# 01_definitions.r
+# 01_definitions.R
 #
 # PURPOSE 1:
 #   Set global definitions that are used throughout the package, and further
@@ -19,7 +19,7 @@
 set_definitions <- function() {
 
   # Norway's last redistricting occurred 2020-01-01
-  config$border <- 2020
+  global$border <- 2020
 
   # fhidata needs to know which border is in use
   # fhidata should also replace the population of 1900 with the current year,
@@ -27,7 +27,7 @@ set_definitions <- function() {
   # This means that it is more appropriate to use the current year's population
   # for year = 1900.
   fhidata::set_config(
-    border = config$border,
+    border = global$border,
     use_current_year_as_1900_pop = TRUE
   )
 }

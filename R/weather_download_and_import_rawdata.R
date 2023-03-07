@@ -2,20 +2,21 @@
 #' weather_download_and_import_rawdata (action)
 #' @param data Data
 #' @param argset Argset
-#' @param schema DB Schema
+#' @param tables DB tables
 #' @export
-weather_download_and_import_rawdata_action <- function(data, argset, schema) {
-  # sc::tm_run_task("weather_download_and_import_rawdata", run_as_rstudio_job_loading_from_devtools = TRUE)
+weather_download_and_import_rawdata_action <- function(data, argset, tables) {
+  # sc9::run_task_sequentially_as_rstudio_job_loading_from_devtools("weather_download_and_import_rawdata")
+  # To be run outside of rstudio: scexample::global$ss$run_task("weather_download_and_import_rawdata")
 
   if (plnr::is_run_directly()) {
-    # sc::tm_get_plans_argsets_as_dt("weather_download_and_import_rawdata")
+    # global$ss$shortcut_get_plans_argsets_as_dt("weather_download_and_import_rawdata")
 
     index_plan <- 1
     index_analysis <- 1
 
-    data <- sc::tm_get_data("weather_download_and_import_rawdata", index_plan = index_plan)
-    argset <- sc::tm_get_argset("weather_download_and_import_rawdata", index_plan = index_plan, index_analysis = index_analysis)
-    schema <- sc::tm_get_schema("weather_download_and_import_rawdata")
+    data <- global$ss$shortcut_get_data("weather_download_and_import_rawdata", index_plan = index_plan)
+    argset <- global$ss$shortcut_get_argset("weather_download_and_import_rawdata", index_plan = index_plan, index_analysis = index_analysis)
+    tables <- global$ss$shortcut_get_tables("weather_download_and_import_rawdata")
   }
 
   # special case that runs before everything
@@ -64,15 +65,16 @@ weather_download_and_import_rawdata_action <- function(data, argset, schema) {
   res[, sex := "total"]
   res[, age := "total"]
   res[, location_code := argset$location_code]
+  res[, border := global$border]
 
   # fill in missing structural variables
-  sc::fill_in_missing_v8(res, border = 2020)
+  cstidy::set_csfmt_rts_data_v1(res)
 
   # we look at the downloaded data
   # res
 
   # put data in db table
-  schema$anon_example_weather_rawdata$insert_data(res)
+  tables$anon_example_weather_rawdata$insert_data(res)
 
   # special case that runs after everything
   if (argset$last_analysis == TRUE) {
@@ -83,16 +85,16 @@ weather_download_and_import_rawdata_action <- function(data, argset, schema) {
 # **** data_selector **** ----
 #' weather_download_and_import_rawdata (data selector)
 #' @param argset Argset
-#' @param schema DB Schema
+#' @param tables DB tables
 #' @export
-weather_download_and_import_rawdata_data_selector <- function(argset, schema) {
+weather_download_and_import_rawdata_data_selector <- function(argset, tables) {
   if (plnr::is_run_directly()) {
     # sc::tm_get_plans_argsets_as_dt("weather_download_and_import_rawdata")
 
     index_plan <- 1
 
-    argset <- sc::tm_get_argset("weather_download_and_import_rawdata", index_plan = index_plan)
-    schema <- sc::tm_get_schema("weather_download_and_import_rawdata")
+    argset <- global$ss$shortcut_get_argset("weather_download_and_import_rawdata", index_plan = index_plan)
+    tables <- global$ss$shortcut_get_tables("weather_download_and_import_rawdata")
   }
 
   # find the mid lat/long for the specified location_code

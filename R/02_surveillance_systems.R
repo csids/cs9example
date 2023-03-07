@@ -1,15 +1,14 @@
 # ******************************************************************************
 # ******************************************************************************
 #
-# 05_deliverables.r
+# 02_surveillance_systems.R
 #
 # PURPOSE 1:
-#   Set all the deliverables that team members are supposed to manually do/check
-#   every day/week/month.
+#   Initialize surveillance systems
 #
 # ******************************************************************************
 # ******************************************************************************
 
-set_deliverables <- function() {
-
+set_surveillance_systems <- function() {
+  global$ss <- sc9::SurveillanceSystem_v9$new()
 }

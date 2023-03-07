@@ -1,7 +1,7 @@
 # ******************************************************************************
 # ******************************************************************************
 #
-# 04_tasks.r
+# 04_tasks.R
 #
 # PURPOSE 1:
 #   Set all the tasks that are run by the package.
@@ -18,7 +18,7 @@ set_tasks <- function() {
   # Weather  ----
   ## > weather_download_and_import_rawdata ----
   # tm_run_task("weather_download_and_import_rawdata")
-  sc::add_task_from_config_v8(
+  global$ss$add_task(
     name_grouping = "weather",
     name_action = "download_and_import_rawdata",
     name_variant = NULL,
@@ -33,18 +33,17 @@ set_tasks <- function() {
     insert_at_end_of_each_plan = FALSE,
     action_fn_name = "scexample::weather_download_and_import_rawdata_action",
     data_selector_fn_name = "scexample::weather_download_and_import_rawdata_data_selector",
-    schema = list(
+    tables = list(
       # input
 
       # output
-      "anon_example_weather_rawdata" = sc::config$schemas$anon_example_weather_rawdata
-    ),
-    info = "This task downloads and imports the raw weather data from MET's API at the municipal level"
+      "anon_example_weather_rawdata" = global$ss$tables$anon_example_weather_rawdata
+    )
   )
 
   ## > weather_clean_data ----
   # tm_run_task("weather_clean_data")
-  sc::add_task_from_config_v8(
+  global$ss$add_task(
     name_grouping = "weather",
     name_action = "clean_data",
     name_variant = NULL,
@@ -59,19 +58,18 @@ set_tasks <- function() {
     insert_at_end_of_each_plan = FALSE,
     action_fn_name = "scexample::weather_clean_data_action",
     data_selector_fn_name = "scexample::weather_clean_data_data_selector",
-    schema = list(
+    tables = list(
       # input
-      "anon_example_weather_rawdata" = sc::config$schemas$anon_example_weather_rawdata,
+      "anon_example_weather_rawdata" = global$ss$tables$anon_example_weather_rawdata,
 
       # output
-      "anon_example_weather_data" = sc::config$schemas$anon_example_weather_data
-    ),
-    info = "This task cleans the raw data and aggregates it to county and national level"
+      "anon_example_weather_data" = global$ss$tables$anon_example_weather_data
+    )
   )
 
   ## > weather_clean_data ----
   # tm_run_task("weather_export_plots")
-  sc::add_task_from_config_v8(
+  global$ss$add_task(
     name_grouping = "weather",
     name_action = "export_plots",
     name_variant = NULL,
@@ -90,18 +88,17 @@ set_tasks <- function() {
     insert_at_end_of_each_plan = FALSE,
     action_fn_name = "scexample::weather_export_plots_action",
     data_selector_fn_name = "scexample::weather_export_plots_data_selector",
-    schema = list(
+    tables = list(
       # input
-      "anon_example_weather_data" = sc::config$schemas$anon_example_weather_data
+      "anon_example_weather_data" = global$ss$tables$anon_example_weather_data
 
       # output
-    ),
-    info = "This task ploduces plots"
+    )
   )
 
   ## > household_incomes_and_house_prices_import_data ----
   # tm_run_task("household_incomes_and_house_prices_import_data")
-  sc::add_task_from_config_v8(
+  global$ss$add_task(
     name_grouping = "household_incomes_and_house_prices",
     name_action = "import_data",
     name_variant = NULL,
@@ -116,19 +113,18 @@ set_tasks <- function() {
     insert_at_end_of_each_plan = FALSE,
     action_fn_name = "scexample::household_incomes_and_house_prices_import_data_action",
     data_selector_fn_name = "scexample::household_incomes_and_house_prices_import_data_data_selector",
-    schema = list(
+    tables = list(
       # input
 
       # output
-      "anon_example_income" = sc::config$schemas$anon_example_income,
-      "anon_example_house_prices" = sc::config$schemas$anon_example_house_prices
-    ),
-    info = "This task downloads and cleans the raw data and aggregates it to county and national level"
+      "anon_example_income" = global$ss$tables$anon_example_income,
+      "anon_example_house_prices" = global$ss$tables$anon_example_house_prices
+    )
   )
 
   ## > household_incomes_and_house_prices_fit_model_and_find_outliers ----
   # tm_run_task("household_incomes_and_house_prices_fit_model_and_find_outliers")
-  sc::add_task_from_config_v8(
+  global$ss$add_task(
     name_grouping = "household_incomes_and_house_prices",
     name_action = "fit_model_and_find_outliers",
     name_variant = NULL,
@@ -143,20 +139,19 @@ set_tasks <- function() {
     insert_at_end_of_each_plan = FALSE,
     action_fn_name = "scexample::household_incomes_and_house_prices_fit_model_and_find_outliers_action",
     data_selector_fn_name = "scexample::household_incomes_and_house_prices_fit_model_and_find_outliers_data_selector",
-    schema = list(
+    tables = list(
       # input
-      "anon_example_income" = sc::config$schemas$anon_example_income,
-      "anon_example_house_prices" = sc::config$schemas$anon_example_house_prices,
+      "anon_example_income" = global$ss$tables$anon_example_income,
+      "anon_example_house_prices" = global$ss$tables$anon_example_house_prices,
 
       # output
-      "anon_example_house_prices_outliers_after_adjusting_for_income" = sc::config$schemas$anon_example_house_prices_outliers_after_adjusting_for_income
-    ),
-    info = "This task downloads and cleans the raw data and aggregates it to county and national level"
+      "anon_example_house_prices_outliers_after_adjusting_for_income" = global$ss$tables$anon_example_house_prices_outliers_after_adjusting_for_income
+    )
   )
 
   ## > household_incomes_and_house_prices_plot ----
   # tm_run_task("household_incomes_and_house_prices_fit_model_and_find_outliers")
-  sc::add_task_from_config_v8(
+  global$ss$add_task(
     name_grouping = "household_incomes_and_house_prices",
     name_action = "plot",
     name_variant = NULL,
@@ -171,14 +166,13 @@ set_tasks <- function() {
     insert_at_end_of_each_plan = FALSE,
     action_fn_name = "scexample::household_incomes_and_house_prices_fit_model_and_find_outliers_action",
     data_selector_fn_name = "scexample::household_incomes_and_house_prices_fit_model_and_find_outliers_data_selector",
-    schema = list(
+    tables = list(
       # input
-      "anon_example_income" = sc::config$schemas$anon_example_income,
-      "anon_example_house_prices" = sc::config$schemas$anon_example_house_prices,
+      "anon_example_income" = global$ss$tables$anon_example_income,
+      "anon_example_house_prices" = global$ss$tables$anon_example_house_prices,
 
       # output
-      "anon_example_house_prices_outliers_after_adjusting_for_income" = sc::config$schemas$anon_example_house_prices_outliers_after_adjusting_for_income
-    ),
-    info = "This task downloads and cleans the raw data and aggregates it to county and national level"
+      "anon_example_house_prices_outliers_after_adjusting_for_income" = global$ss$tables$anon_example_house_prices_outliers_after_adjusting_for_income
+    )
   )
 }
