@@ -74,7 +74,7 @@ weather_download_and_import_rawdata_action <- function(data, argset, tables) {
   # res
 
   # put data in db table
-  tables$anon_example_weather_rawdata$insert_data(res)
+  tables$anon_example_weather_rawdata$upsert_data(res)
 
   # special case that runs after everything
   if (argset$last_analysis == TRUE) {

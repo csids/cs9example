@@ -2,20 +2,22 @@
 #' weather_clean_data (action)
 #' @param data Data
 #' @param argset Argset
-#' @param schema DB Schema
+#' @param tables DB tables
 #' @export
-weather_clean_data_action <- function(data, argset, schema) {
-  # tm_run_task("weather_clean_data")
+weather_clean_data_action <- function(data, argset, tables) {
+  # sc9::run_task_sequentially_as_rstudio_job_loading_from_devtools("weather_clean_data")
+  # To be run outside of rstudio: scexample::global$ss$run_task("weather_clean_data")
+
 
   if (plnr::is_run_directly()) {
-    # sc::tm_get_plans_argsets_as_dt("weather_clean_data")
+    # global$ss$shortcut_get_plans_argsets_as_dt("weather_clean_data")
 
     index_plan <- 1
     index_analysis <- 1
 
-    data <- sc::tm_get_data("weather_clean_data", index_plan = index_plan)
-    argset <- sc::tm_get_argset("weather_clean_data", index_plan = index_plan, index_analysis = index_analysis)
-    schema <- sc::tm_get_schema("weather_clean_data")
+    data <- global$ss$shortcut_get_data("weather_clean_data", index_plan = index_plan)
+    argset <- global$ss$shortcut_get_argset("weather_clean_data", index_plan = index_plan, index_analysis = index_analysis)
+    tables <- global$ss$shortcut_get_tables("weather_clean_data")
   }
 
   # special case that runs before everything
@@ -156,13 +158,14 @@ weather_clean_data_action <- function(data, argset, schema) {
   # day
   skeleton_day[, sex := "total"]
   skeleton_day[, age := "total"]
-  sc::fill_in_missing_v8(skeleton_day, border = config$border)
+  skeleton_day[, border := global$border]
+  cstidy::set_csfmt_rts_data_v1(skeleton_day)
 
   # isoweek
   skeleton_isoweek[, sex := "total"]
   skeleton_isoweek[, age := "total"]
-  sc::fill_in_missing_v8(skeleton_isoweek, border = config$border)
-  skeleton_isoweek[, date := as.Date(date)]
+  skeleton_isoweek[, border := global$border]
+  cstidy::set_csfmt_rts_data_v1(skeleton_isoweek)
 
   skeleton <- rbindlist(
     list(
@@ -173,7 +176,7 @@ weather_clean_data_action <- function(data, argset, schema) {
   )
 
   # put data in db table
-  schema$anon_example_weather_data$drop_all_rows_and_then_insert_data(skeleton)
+  tables$anon_example_weather_data$drop_all_rows_and_then_insert_data(skeleton)
 
   # special case that runs after everything
   if (argset$last_analysis == TRUE) {
@@ -184,21 +187,21 @@ weather_clean_data_action <- function(data, argset, schema) {
 # **** data_selector **** ----
 #' weather_clean_data (data selector)
 #' @param argset Argset
-#' @param schema DB Schema
+#' @param tables DB tables
 #' @export
-weather_clean_data_data_selector <- function(argset, schema) {
+weather_clean_data_data_selector <- function(argset, tables) {
   if (plnr::is_run_directly()) {
-    # sc::tm_get_plans_argsets_as_dt("weather_clean_data")
+    # global$ss$shortcut_get_plans_argsets_as_dt("weather_clean_data")
 
     index_plan <- 1
 
-    argset <- sc::tm_get_argset("weather_clean_data", index_plan = index_plan)
-    schema <- sc::tm_get_schema("weather_clean_data")
+    argset <- global$ss$shortcut_get_argset("weather_clean_data", index_plan = index_plan)
+    tables <- global$ss$shortcut_get_tables("weather_clean_data")
   }
 
-  # The database schemas can be accessed here
-  d <- schema$anon_example_weather_rawdata$tbl() %>%
-    sc::mandatory_db_filter(
+  # The database tabless can be accessed here
+  d <- tables$anon_example_weather_rawdata$tbl() %>%
+    sc9::mandatory_db_filter(
       granularity_time = "day",
       granularity_time_not = NULL,
       granularity_geo = "municip",
