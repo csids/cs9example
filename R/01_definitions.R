@@ -19,7 +19,7 @@
 set_definitions <- function() {
 
   # Norway's last redistricting occurred 2020-01-01
-  global$border <- 2020
+  global$border <- 2024
 
   # fhidata needs to know which border is in use
   # fhidata should also replace the population of 1900 with the current year,
@@ -29,5 +29,9 @@ set_definitions <- function() {
   fhidata::set_config(
     border = global$border,
     use_current_year_as_1900_pop = TRUE
+  )
+
+  csdata::set_config(
+    border_nor = global$border
   )
 }

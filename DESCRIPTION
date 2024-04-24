@@ -1,6 +1,6 @@
 Package: sc9example
 Title: A skeleton implementation of sc9 (Surveillance Core 9)
-Version: 2021.7.6
+Version: 24.4.24
 Authors@R: c(
   person(
     given = "Richard",
