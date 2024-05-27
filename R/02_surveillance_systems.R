@@ -10,5 +10,5 @@
 # ******************************************************************************
 
 set_surveillance_systems <- function() {
-  global$ss <- sc9::SurveillanceSystem_v9$new()
+  global$ss <- cs9::SurveillanceSystem_v9$new()
 }

@@ -5,8 +5,8 @@
 #' @param tables DB tables
 #' @export
 weather_export_plots_action <- function(data, argset, tables) {
-  # sc9::run_task_sequentially_as_rstudio_job_using_load_all("weather_export_plots")
-  # To be run outside of rstudio: sc9example::global$ss$run_task("weather_export_plots")
+  # cs9::run_task_sequentially_as_rstudio_job_using_load_all("weather_export_plots")
+  # To be run outside of rstudio: cs9example::global$ss$run_task("weather_export_plots")
 
   if(plnr::is_run_directly()){
     # global$ss$shortcut_get_plans_argsets_as_dt("weather_export_plots")
@@ -60,7 +60,7 @@ weather_export_plots_data_selector = function(argset, tables){
 
   # The database tables can be accessed here
   d <- tables$anon_example_weather_data$tbl() %>%
-    sc9::mandatory_db_filter(
+    cs9::mandatory_db_filter(
       granularity_time = NULL,
       granularity_time_not = NULL,
       granularity_geo = NULL,

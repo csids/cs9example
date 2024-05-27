@@ -1,6 +1,6 @@
 # MIT License
 
-Copyright (c) 2021 sc9example authors
+Copyright (c) 2021 cs9example authors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

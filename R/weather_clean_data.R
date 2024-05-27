@@ -5,8 +5,8 @@
 #' @param tables DB tables
 #' @export
 weather_clean_data_action <- function(data, argset, tables) {
-  # sc9::run_task_sequentially_as_rstudio_job_using_load_all("weather_clean_data")
-  # To be run outside of rstudio: sc9example::global$ss$run_task("weather_clean_data")
+  # cs9::run_task_sequentially_as_rstudio_job_using_load_all("weather_clean_data")
+  # To be run outside of rstudio: cs9example::global$ss$run_task("weather_clean_data")
 
 
   if (plnr::is_run_directly()) {
@@ -201,7 +201,7 @@ weather_clean_data_data_selector <- function(argset, tables) {
 
   # The database tabless can be accessed here
   d <- tables$anon_example_weather_rawdata$tbl() %>%
-    sc9::mandatory_db_filter(
+    cs9::mandatory_db_filter(
       granularity_time = "day",
       granularity_time_not = NULL,
       granularity_geo = "municip",

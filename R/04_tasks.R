@@ -31,8 +31,8 @@ set_tasks <- function() {
     universal_argset = NULL,
     upsert_at_end_of_each_plan = FALSE,
     insert_at_end_of_each_plan = FALSE,
-    action_fn_name = "sc9example::covid19_import_data_action",
-    data_selector_fn_name = "sc9example::covid19_import_data_data_selector",
+    action_fn_name = "cs9example::covid19_import_data_action",
+    data_selector_fn_name = "cs9example::covid19_import_data_data_selector",
     tables = list(
       # input
 
@@ -58,8 +58,8 @@ set_tasks <- function() {
     universal_argset = NULL,
     upsert_at_end_of_each_plan = FALSE,
     insert_at_end_of_each_plan = FALSE,
-    action_fn_name = "sc9example::weather_download_and_import_rawdata_action",
-    data_selector_fn_name = "sc9example::weather_download_and_import_rawdata_data_selector",
+    action_fn_name = "cs9example::weather_download_and_import_rawdata_action",
+    data_selector_fn_name = "cs9example::weather_download_and_import_rawdata_data_selector",
     tables = list(
       # input
 
@@ -83,8 +83,8 @@ set_tasks <- function() {
     universal_argset = NULL,
     upsert_at_end_of_each_plan = FALSE,
     insert_at_end_of_each_plan = FALSE,
-    action_fn_name = "sc9example::weather_clean_data_action",
-    data_selector_fn_name = "sc9example::weather_clean_data_data_selector",
+    action_fn_name = "cs9example::weather_clean_data_action",
+    data_selector_fn_name = "cs9example::weather_clean_data_data_selector",
     tables = list(
       # input
       "anon_example_weather_rawdata" = global$ss$tables$anon_example_weather_rawdata,
@@ -113,8 +113,8 @@ set_tasks <- function() {
     ),
     upsert_at_end_of_each_plan = FALSE,
     insert_at_end_of_each_plan = FALSE,
-    action_fn_name = "sc9example::weather_export_plots_action",
-    data_selector_fn_name = "sc9example::weather_export_plots_data_selector",
+    action_fn_name = "cs9example::weather_export_plots_action",
+    data_selector_fn_name = "cs9example::weather_export_plots_data_selector",
     tables = list(
       # input
       "anon_example_weather_data" = global$ss$tables$anon_example_weather_data

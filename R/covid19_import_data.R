@@ -5,8 +5,8 @@
 #' @param tables DB tables
 #' @export
 covid19_import_data_action <- function(data, argset, tables) {
-  # sc9::run_task_sequentially_as_rstudio_job_using_load_all("covid19_import_data")
-  # To be run outside of rstudio: sc9example::global$ss$run_task("covid19_import_data")
+  # cs9::run_task_sequentially_as_rstudio_job_using_load_all("covid19_import_data")
+  # To be run outside of rstudio: cs9example::global$ss$run_task("covid19_import_data")
 
   if (plnr::is_run_directly()) {
     # global$ss$shortcut_get_plans_argsets_as_dt("covid19_import_data")

@@ -5,8 +5,8 @@
 #' @param tables DB tables
 #' @export
 weather_download_and_import_rawdata_action <- function(data, argset, tables) {
-  # sc9::run_task_sequentially_as_rstudio_job_using_load_all("weather_download_and_import_rawdata")
-  # To be run outside of rstudio: sc9example::global$ss$run_task("weather_download_and_import_rawdata")
+  # cs9::run_task_sequentially_as_rstudio_job_using_load_all("weather_download_and_import_rawdata")
+  # To be run outside of rstudio: cs9example::global$ss$run_task("weather_download_and_import_rawdata")
 
   if (plnr::is_run_directly()) {
     # global$ss$shortcut_get_plans_argsets_as_dt("weather_download_and_import_rawdata")

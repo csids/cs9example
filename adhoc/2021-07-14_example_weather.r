@@ -1,4 +1,4 @@
-library(sc9example)
+library(cs9example)
 library(magrittr)
 library(data.table)
 

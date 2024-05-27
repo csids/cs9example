@@ -1,5 +1,5 @@
-Package: sc9example
-Title: A skeleton implementation of sc9 (Surveillance Core 9)
+Package: cs9example
+Title: A skeleton implementation of cs9 (Surveillance Core 9)
 Version: 24.4.24
 Authors@R: c(
   person(
@@ -10,10 +10,10 @@ Authors@R: c(
     comment = c(ORCID = "0000-0002-6747-1726")
   )
   )
-Description: A skeleton implementation of sc9 (Surveillance Core 9)
+Description: A skeleton implementation of cs9 (Surveillance Core 9)
 License: MIT + file LICENSE
-URL: https://www.csids.no/sc9/
-BugReports: https://github.com/csids/sc9/issues
+URL: https://www.csids.no/cs9/
+BugReports: https://github.com/csids/cs9/issues
 Depends:
     R (>= 4.1.0)
 Imports:
@@ -26,7 +26,7 @@ Imports:
     magrittr,
     merTools,
     rmarkdown,
-    sc9,
+    cs9,
     tidyr
 Suggests: 
     knitr,
