@@ -61,7 +61,7 @@ weather_download_and_import_rawdata_action <- function(data, argset, tables) {
   # res
 
   # we now need to format it
-  res[, granularity_time := "day"]
+  res[, granularity_time := "date"]
   res[, sex := "total"]
   res[, age := "total"]
   res[, location_code := argset$location_code]

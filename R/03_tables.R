@@ -11,53 +11,6 @@
 
 set_db_tables <- function() {
   # __________ ----
-  # Covid-19  ----
-  ## > anon_covid19_data ----
-  global$ss$add_table(
-    name_access = c("anon"),
-    name_grouping = "covid19",
-    name_variant = "data",
-    field_types =  c(
-      "granularity_time" = "TEXT",
-      "granularity_geo" = "TEXT",
-      "country_iso3" = "TEXT",
-      "location_code" = "TEXT",
-      "border" = "INTEGER",
-      "age" = "TEXT",
-      "sex" = "TEXT",
-
-      "isoyear" = "INTEGER",
-      "isoweek" = "INTEGER",
-      "isoyearweek" = "TEXT",
-      "isoquarter" = "INTEGER",
-      "isoyearquarter" = "TEXT",
-      "season" = "TEXT",
-      "seasonweek" = "DOUBLE",
-
-      "calyear" = "INTEGER",
-      "calmonth" = "INTEGER",
-      "calyearmonth" = "TEXT",
-
-      "date" = "DATE",
-
-      "covid19_cases_testdate_n" = "INTEGER",
-      "covid19_cases_testdate_pr100000" = "DOUBLE"
-    ),
-    keys = c(
-      "granularity_time",
-      "location_code",
-      "date",
-      "age",
-      "sex"
-    ),
-    indexes = list(
-      "ind1" = c("granularity_time", "granularity_geo", "country_iso3", "location_code", "border", "age", "sex", "date", "isoyear", "isoweek", "isoyearweek")
-    ),
-    validator_field_types = csdb::validator_field_types_blank,
-    validator_field_contents = csdb::validator_field_contents_blank
-  )
-
-  # __________ ----
   # Weather  ----
   ## > anon_example_weather_rawdata ----
   global$ss$add_table(
@@ -101,8 +54,8 @@ set_db_tables <- function() {
     indexes = list(
       "ind1" = c("granularity_time", "granularity_geo", "country_iso3", "location_code", "border", "age", "sex", "date", "isoyear", "isoweek", "isoyearweek")
     ),
-    validator_field_types = csdb::validator_field_types_blank,
-    validator_field_contents = csdb::validator_field_contents_blank
+    validator_field_types = csdb::validator_field_types_csfmt_rts_data_v2,
+    validator_field_contents = csdb::validator_field_contents_csfmt_rts_data_v2
   )
 
   ## > anon_example_weather_data ----
@@ -136,51 +89,6 @@ set_db_tables <- function() {
       "temp_max" = "DOUBLE",
       "temp_min" = "DOUBLE",
       "precip" = "DOUBLE"
-    ),
-    keys = c(
-      "granularity_time",
-      "location_code",
-      "date",
-      "age",
-      "sex"
-    ),
-    validator_field_types = csdb::validator_field_types_csfmt_rts_data_v2,
-    validator_field_contents = csdb::validator_field_contents_csfmt_rts_data_v2
-  )
-
-  ## > anon_example_income ----
-  global$ss$add_table(
-    name_access = c("anon"),
-    name_grouping = "example_income",
-    name_variant = NULL,
-    field_types =  c(
-      "granularity_time" = "TEXT",
-      "granularity_geo" = "TEXT",
-      "country_iso3" = "TEXT",
-      "location_code" = "TEXT",
-      "border" = "INTEGER",
-      "age" = "TEXT",
-      "sex" = "TEXT",
-
-      "isoyear" = "INTEGER",
-      "isoweek" = "INTEGER",
-      "isoyearweek" = "TEXT",
-      "isoquarter" = "INTEGER",
-      "isoyearquarter" = "TEXT",
-      "season" = "TEXT",
-      "seasonweek" = "DOUBLE",
-
-      "calyear" = "INTEGER",
-      "calmonth" = "INTEGER",
-      "calyearmonth" = "TEXT",
-
-      "date" = "DATE",
-
-      "household_income_median_all_households_nok" = "DOUBLE",
-      "household_income_median_singles_nok" = "DOUBLE",
-      "household_income_median_couples_without_children_nok" = "DOUBLE",
-      "household_income_median_couples_with_children_nok" = "DOUBLE",
-      "household_income_median_single_with_children_nok" = "DOUBLE"
     ),
     keys = c(
       "granularity_time",

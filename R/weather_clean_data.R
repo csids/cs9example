@@ -8,7 +8,6 @@ weather_clean_data_action <- function(data, argset, tables) {
   # cs9::run_task_sequentially_as_rstudio_job_using_load_all("weather_clean_data")
   # To be run outside of rstudio: cs9example::global$ss$run_task("weather_clean_data")
 
-
   if (plnr::is_run_directly()) {
     # global$ss$shortcut_get_plans_argsets_as_dt("weather_clean_data")
 
@@ -136,14 +135,14 @@ weather_clean_data_action <- function(data, argset, tables) {
   # 10. (If desirable) aggregate up to higher time granularities
   # if necessary, it is now easy to aggregate up to weekly data from here
   skeleton_isoweek <- copy(skeleton_day)
-  skeleton_isoweek[, isoyearweek := fhiplot::isoyearweek_c(date)]
+  skeleton_isoweek[, isoyearweek := cstime::date_to_isoyearweek_c(date)]
   skeleton_isoweek <- skeleton_isoweek[
     ,
     .(
       temp_max = mean(temp_max, na.rm = T),
       temp_min = mean(temp_min, na.rm = T),
       precip = mean(precip, na.rm = T),
-      granularity_time = "isoweek"
+      granularity_time = "isoyearweek"
     ),
     keyby = .(
       isoyearweek,
@@ -159,7 +158,7 @@ weather_clean_data_action <- function(data, argset, tables) {
   skeleton_day[, sex := "total"]
   skeleton_day[, age := "total"]
   skeleton_day[, border := global$border]
-  cstidy::set_csfmt_rts_data_v1(skeleton_day)
+  cstidy::set_csfmt_rts_data_v2(skeleton_day)
 
   # isoweek
   skeleton_isoweek[, sex := "total"]
@@ -202,7 +201,7 @@ weather_clean_data_data_selector <- function(argset, tables) {
   # The database tabless can be accessed here
   d <- tables$anon_example_weather_rawdata$tbl() %>%
     cs9::mandatory_db_filter(
-      granularity_time = "day",
+      granularity_time = "date",
       granularity_time_not = NULL,
       granularity_geo = "municip",
       granularity_geo_not = NULL,
