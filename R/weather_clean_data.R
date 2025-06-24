@@ -24,52 +24,23 @@ weather_clean_data_action <- function(data, argset, tables) {
 
   }
 
-  # make sure there's no missing data via the creation of a skeleton
-  # https://folkehelseinstituttet.github.io/fhidata/articles/Skeletons.html
-
-  # Create a variable (possibly a list) to hold the data
-  d_agg <- list()
-  d_agg$day_municip <- copy(data$day_municip)
-
   # Pull out important dates
-  date_min <- min(d_agg$day_municip$date, na.rm = T)
-  date_max <- max(d_agg$day_municip$date, na.rm = T)
+  date_min <- min(data$date_municip$date, na.rm = T)
+  date_max <- max(data$date_municip$date, na.rm = T)
 
-  # Create `multiskeleton`
-  # granularity_geo should have the following groups:
-  # - nodata (when no data is available, and there is no "finer" data available to aggregate up)
-  # - all levels of granularity_geo where you have data available
-  # If you do not have data for a specific granularity_geo, but there is "finer" data available
-  # then you should not include this granularity_geo in the multiskeleton, because you will create
-  # it later when you aggregate up your data (baregion)
-  multiskeleton_day <- fhidata::make_skeleton(
+  multiskeleton_date <- list()
+  # Create skeleton for municip granularity
+  multiskeleton_date$municip <- make_skeleton_date(
     date_min = date_min,
     date_max = date_max,
-    granularity_geo = list(
-      "nodata" = c(
-        "wardoslo",
-        "extrawardoslo",
-        "missingwardoslo",
-        "wardbergen",
-        "missingwardbergen",
-        "wardstavanger",
-        "missingwardstavanger",
-        "notmainlandmunicip",
-        "missingmunicip",
-        "notmainlandcounty",
-        "missingcounty"
-      ),
-      "municip" = c(
-        "municip"
-      )
-    )
+    granularity_geo = "municip"
   )
 
   # Merge in the information you have at different geographical granularities
   # one level at a time
   # municip
-  multiskeleton_day$municip[
-    d_agg$day_municip,
+  multiskeleton_date$municip[
+    data$date_municip,
     on = c("location_code", "date"),
     c(
       "temp_max",
@@ -82,11 +53,9 @@ weather_clean_data_action <- function(data, argset, tables) {
     )
   ]
 
-  multiskeleton_day$municip[]
-
   # Aggregate up to higher geographical granularities (county)
-  multiskeleton_day$county <- multiskeleton_day$municip[
-    fhidata::norway_locations_hierarchy(
+  multiskeleton_date$county <- multiskeleton_date$municip[
+    csdata::nor_locations_hierarchy_from_to(
       from = "municip",
       to = "county"
     ),
@@ -107,17 +76,17 @@ weather_clean_data_action <- function(data, argset, tables) {
     )
   ]
 
-  multiskeleton_day$county[]
+  multiskeleton_date$county[]
 
   # Aggregate up to higher geographical granularities (nation)
-  multiskeleton_day$nation <- multiskeleton_day$municip[
+  multiskeleton_date$nation <- multiskeleton_date$municip[
     ,
     .(
       temp_max = mean(temp_max, na.rm = T),
       temp_min = mean(temp_min, na.rm = T),
       precip = mean(precip, na.rm = T),
       granularity_geo = "nation",
-      location_code = "norge"
+      location_code = "nation_nor"
     ),
     by = .(
       granularity_time,
@@ -125,18 +94,18 @@ weather_clean_data_action <- function(data, argset, tables) {
     )
   ]
 
-  multiskeleton_day$nation[]
+  multiskeleton_date$nation[]
 
   # combine all the different granularity_geos
-  skeleton_day <- rbindlist(multiskeleton_day, fill = TRUE, use.names = TRUE)
+  skeleton_date <- rbindlist(multiskeleton_date, fill = TRUE, use.names = TRUE)
 
-  skeleton_day[]
+  skeleton_date[]
 
   # 10. (If desirable) aggregate up to higher time granularities
   # if necessary, it is now easy to aggregate up to weekly data from here
-  skeleton_isoweek <- copy(skeleton_day)
-  skeleton_isoweek[, isoyearweek := cstime::date_to_isoyearweek_c(date)]
-  skeleton_isoweek <- skeleton_isoweek[
+  skeleton_isoyearweek <- copy(skeleton_date)
+  skeleton_isoyearweek[, isoyearweek := cstime::date_to_isoyearweek_c(date)]
+  skeleton_isoyearweek <- skeleton_isoyearweek[
     ,
     .(
       temp_max = mean(temp_max, na.rm = T),
@@ -151,25 +120,25 @@ weather_clean_data_action <- function(data, argset, tables) {
     )
   ]
 
-  skeleton_isoweek[]
+  skeleton_isoyearweek[]
 
   # we now need to format it and fill in missing structural variables
   # day
-  skeleton_day[, sex := "total"]
-  skeleton_day[, age := "total"]
-  skeleton_day[, border := global$border]
-  cstidy::set_csfmt_rts_data_v2(skeleton_day)
+  skeleton_date[, sex := "total"]
+  skeleton_date[, age := "total"]
+  skeleton_date[, border := global$border]
+  cstidy::set_csfmt_rts_data_v2(skeleton_date)
 
   # isoweek
-  skeleton_isoweek[, sex := "total"]
-  skeleton_isoweek[, age := "total"]
-  skeleton_isoweek[, border := global$border]
-  cstidy::set_csfmt_rts_data_v1(skeleton_isoweek)
+  skeleton_isoyearweek[, sex := "total"]
+  skeleton_isoyearweek[, age := "total"]
+  skeleton_isoyearweek[, border := global$border]
+  cstidy::set_csfmt_rts_data_v1(skeleton_isoyearweek)
 
   skeleton <- rbindlist(
     list(
-      skeleton_day,
-      skeleton_isoweek
+      skeleton_date,
+      skeleton_isoyearweek
     ),
     use.names = T
   )
@@ -246,7 +215,7 @@ weather_clean_data_data_selector <- function(argset, tables) {
 
   # The variable returned must be a named list
   retval <- list(
-    "day_municip" = d
+    "date_municip" = d
   )
 
   retval

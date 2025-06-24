@@ -76,7 +76,7 @@ set_tasks <- function() {
     cores = 1,
     plan_analysis_fn_name = NULL,
     for_each_plan = plnr::expand_list(
-      location_code = fhidata::norway_locations_names()[granularity_geo %in% c("county")]$location_code
+      location_code = csdata::nor_locations_names()[granularity_geo %in% c("county")]$location_code
     ),
     for_each_analysis = NULL,
     universal_argset = list(
