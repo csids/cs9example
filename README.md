@@ -30,10 +30,10 @@ CS9_DBCONFIG_ROLE_CREATE_TABLE='yourusername'
 CS9_DBCONFIG_SERVER='db'
 
 CS9_DBCONFIG_SCHEMA_CONFIG='public'
-CS9_DBCONFIG_DB_CONFIG='cs_interactive_config'
+CS9_DBCONFIG_DB_CONFIG='postgres'
 
 CS9_DBCONFIG_SCHEMA_ANON='public'
-CS9_DBCONFIG_DB_ANON='cs_interactive_anon'
+CS9_DBCONFIG_DB_ANON='postgres'
 ```
 
 After adding these variables, restart your R session for the changes to take effect.
