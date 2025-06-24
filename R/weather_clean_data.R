@@ -133,7 +133,7 @@ weather_clean_data_action <- function(data, argset, tables) {
   skeleton_isoyearweek[, sex := "total"]
   skeleton_isoyearweek[, age := "total"]
   skeleton_isoyearweek[, border := global$border]
-  cstidy::set_csfmt_rts_data_v1(skeleton_isoyearweek)
+  cstidy::set_csfmt_rts_data_v2(skeleton_isoyearweek)
 
   skeleton <- rbindlist(
     list(
