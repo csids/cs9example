@@ -17,7 +17,7 @@ set_tasks <- function() {
   # __________ ----
   # Weather  ----
   ## > weather_download_and_import_rawdata ----
-  # tm_run_task("weather_download_and_import_rawdata")
+  # cs9::run_task_sequentially_as_rstudio_job_using_load_all("weather_download_and_import_rawdata")
   global$ss$add_task(
     name_grouping = "weather",
     name_action = "download_and_import_rawdata",
@@ -42,7 +42,7 @@ set_tasks <- function() {
   )
 
   ## > weather_clean_data ----
-  # tm_run_task("weather_clean_data")
+  # cs9::run_task_sequentially_as_rstudio_job_using_load_all("weather_clean_data")
   global$ss$add_task(
     name_grouping = "weather",
     name_action = "clean_data",
@@ -68,7 +68,7 @@ set_tasks <- function() {
   )
 
   ## > weather_export_plots ----
-  # tm_run_task("weather_export_plots")
+  # cs9::run_task_sequentially_as_rstudio_job_using_load_all("weather_export_plots")
   global$ss$add_task(
     name_grouping = "weather",
     name_action = "export_plots",

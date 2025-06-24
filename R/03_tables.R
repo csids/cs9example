@@ -53,8 +53,8 @@ set_db_tables <- function() {
     indexes = list(
       "ind1" = c("granularity_time", "granularity_geo", "country_iso3", "location_code", "border", "age", "sex", "date", "isoyear", "isoweek", "isoyearweek")
     ),
-    validator_field_types = csdb::validator_field_types_csfmt_rts_data_v2,
-    validator_field_contents = csdb::validator_field_contents_csfmt_rts_data_v2
+    validator_field_types = csdb::validator_field_types_blank,
+    validator_field_contents = csdb::validator_field_contents_blank
   )
 
   # __________ ----
@@ -101,8 +101,8 @@ set_db_tables <- function() {
     indexes = list(
       "ind1" = c("granularity_time", "granularity_geo", "country_iso3", "location_code", "border", "age", "sex", "date", "isoyear", "isoweek", "isoyearweek")
     ),
-    validator_field_types = csdb::validator_field_types_csfmt_rts_data_v2,
-    validator_field_contents = csdb::validator_field_contents_csfmt_rts_data_v2
+    validator_field_types = csdb::validator_field_types_blank,
+    validator_field_contents = csdb::validator_field_contents_blank
   )
 
   ## > anon_example_weather_data ----

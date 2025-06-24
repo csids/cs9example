@@ -68,7 +68,7 @@ weather_download_and_import_rawdata_action <- function(data, argset, tables) {
   res[, border := global$border]
 
   # fill in missing structural variables
-  cstidy::set_csfmt_rts_data_v1(res)
+  cstidy::set_csfmt_rts_data_v2(res)
 
   # we look at the downloaded data
   # res
