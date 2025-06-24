@@ -29,6 +29,8 @@ set_db_tables <- function() {
       "isoyear" = "INTEGER",
       "isoweek" = "INTEGER",
       "isoyearweek" = "TEXT",
+      "isoquarter" = "INTEGER",
+      "isoyearquarter" = "TEXT",
       "season" = "TEXT",
       "seasonweek" = "DOUBLE",
 
@@ -51,8 +53,8 @@ set_db_tables <- function() {
     indexes = list(
       "ind1" = c("granularity_time", "granularity_geo", "country_iso3", "location_code", "border", "age", "sex", "date", "isoyear", "isoweek", "isoyearweek")
     ),
-    validator_field_types = csdb::validator_field_types_blank,
-    validator_field_contents = csdb::validator_field_contents_blank
+    validator_field_types = csdb::validator_field_types_csfmt_rts_data_v2,
+    validator_field_contents = csdb::validator_field_contents_csfmt_rts_data_v2
   )
 
   # __________ ----
@@ -74,6 +76,8 @@ set_db_tables <- function() {
       "isoyear" = "INTEGER",
       "isoweek" = "INTEGER",
       "isoyearweek" = "TEXT",
+      "isoquarter" = "INTEGER",
+      "isoyearquarter" = "TEXT",
       "season" = "TEXT",
       "seasonweek" = "DOUBLE",
 
@@ -94,8 +98,11 @@ set_db_tables <- function() {
       "age",
       "sex"
     ),
-    validator_field_types = csdb::validator_field_types_csfmt_rts_data_v1,
-    validator_field_contents = csdb::validator_field_contents_csfmt_rts_data_v1
+    indexes = list(
+      "ind1" = c("granularity_time", "granularity_geo", "country_iso3", "location_code", "border", "age", "sex", "date", "isoyear", "isoweek", "isoyearweek")
+    ),
+    validator_field_types = csdb::validator_field_types_csfmt_rts_data_v2,
+    validator_field_contents = csdb::validator_field_contents_csfmt_rts_data_v2
   )
 
   ## > anon_example_weather_data ----
@@ -115,6 +122,8 @@ set_db_tables <- function() {
       "isoyear" = "INTEGER",
       "isoweek" = "INTEGER",
       "isoyearweek" = "TEXT",
+      "isoquarter" = "INTEGER",
+      "isoyearquarter" = "TEXT",
       "season" = "TEXT",
       "seasonweek" = "DOUBLE",
 
@@ -135,8 +144,8 @@ set_db_tables <- function() {
       "age",
       "sex"
     ),
-    validator_field_types = csdb::validator_field_types_csfmt_rts_data_v1,
-    validator_field_contents = csdb::validator_field_contents_csfmt_rts_data_v1
+    validator_field_types = csdb::validator_field_types_csfmt_rts_data_v2,
+    validator_field_contents = csdb::validator_field_contents_csfmt_rts_data_v2
   )
 
   ## > anon_example_income ----
@@ -156,6 +165,8 @@ set_db_tables <- function() {
       "isoyear" = "INTEGER",
       "isoweek" = "INTEGER",
       "isoyearweek" = "TEXT",
+      "isoquarter" = "INTEGER",
+      "isoyearquarter" = "TEXT",
       "season" = "TEXT",
       "seasonweek" = "DOUBLE",
 
@@ -178,7 +189,7 @@ set_db_tables <- function() {
       "age",
       "sex"
     ),
-    validator_field_types = csdb::validator_field_types_csfmt_rts_data_v1,
-    validator_field_contents = csdb::validator_field_contents_csfmt_rts_data_v1
+    validator_field_types = csdb::validator_field_types_csfmt_rts_data_v2,
+    validator_field_contents = csdb::validator_field_contents_csfmt_rts_data_v2
   )
 }

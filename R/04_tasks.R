@@ -15,33 +15,6 @@
 
 set_tasks <- function() {
   # __________ ----
-  # Covid-19  ----
-  ## > covid19_import_data ----
-  # tm_run_task("covid19_import_data")
-  global$ss$add_task(
-    name_grouping = "covid19",
-    name_action = "import_data",
-    name_variant = NULL,
-    cores = 1,
-    plan_analysis_fn_name = NULL,
-    for_each_plan = plnr::expand_list(
-      x = 1
-    ),
-    for_each_analysis = NULL,
-    universal_argset = NULL,
-    upsert_at_end_of_each_plan = FALSE,
-    insert_at_end_of_each_plan = FALSE,
-    action_fn_name = "cs9example::covid19_import_data_action",
-    data_selector_fn_name = "cs9example::covid19_import_data_data_selector",
-    tables = list(
-      # input
-
-      # output
-      "anon_covid19_data" = global$ss$tables$anon_covid19_data
-    )
-  )
-
-  # __________ ----
   # Weather  ----
   ## > weather_download_and_import_rawdata ----
   # tm_run_task("weather_download_and_import_rawdata")
@@ -52,7 +25,7 @@ set_tasks <- function() {
     cores = 1,
     plan_analysis_fn_name = NULL,
     for_each_plan = plnr::expand_list(
-      location_code = fhidata::norway_locations_names()[granularity_geo %in% c("municip")]$location_code
+      location_code = unique(csmaps::nor_municip_map_b2024_default_dt$location_code)
     ),
     for_each_analysis = NULL,
     universal_argset = NULL,
@@ -94,7 +67,7 @@ set_tasks <- function() {
     )
   )
 
-  ## > weather_clean_data ----
+  ## > weather_export_plots ----
   # tm_run_task("weather_export_plots")
   global$ss$add_task(
     name_grouping = "weather",

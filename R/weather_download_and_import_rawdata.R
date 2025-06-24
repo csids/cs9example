@@ -98,7 +98,7 @@ weather_download_and_import_rawdata_data_selector <- function(argset, tables) {
   }
 
   # find the mid lat/long for the specified location_code
-  gps <- fhimaps::norway_lau2_map_b2020_default_dt[location_code == argset$location_code,.(
+  gps <- csmaps::nor_municip_map_b2024_default_dt[location_code == argset$location_code,.(
     lat = mean(lat),
     long = mean(long)
   )]
