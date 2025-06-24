@@ -31,7 +31,8 @@ make_skeleton_date <- function(date_min, date_max, granularity_geo, location_ref
   dates <- seq.Date(from = date_min, to = date_max, by = "day")
   
   # Get valid location codes for this granularity type
-  valid_locations <- location_reference[granularity_geo %in% ..granularity_geo]
+  gran_geo_values <- granularity_geo
+  valid_locations <- location_reference[granularity_geo %in% gran_geo_values]
   
   if (nrow(valid_locations) == 0) {
     warning(sprintf("No valid locations found for granularity_geo values: %s", 
@@ -83,7 +84,8 @@ make_skeleton_isoyearweek <- function(isoyearweek_min, isoyearweek_max, granular
   ]$isoyearweek
   
   # Get valid location codes for this granularity type
-  valid_locations <- location_reference[granularity_geo %in% ..granularity_geo]
+  gran_geo_values <- granularity_geo
+  valid_locations <- location_reference[granularity_geo %in% gran_geo_values]
   
   if (nrow(valid_locations) == 0) {
     warning(sprintf("No valid locations found for granularity_geo values: %s", 
