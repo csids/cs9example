@@ -19,7 +19,7 @@ Depends:
 Imports:
     data.table,
     dplyr,
-    fhidata,
+    csdata,
     fs,
     janitor,
     ggplot2,
