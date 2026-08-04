@@ -11,6 +11,31 @@ weather_download_and_import_rawdata_data_selector(argset, tables)
 
 \item{tables}{DB tables}
 }
-\description{
-weather_download_and_import_rawdata (data selector)
+\value{
+A named list with one element, \code{data}: the parsed forecast.
 }
+\description{
+Takes the mean latitude and longitude of the municipality named in
+\code{argset$location_code}, then downloads the MET Norway location forecast for
+that point. Returns it under the name \code{data}.
+}
+\examples{
+\dontrun{
+# Needs internet access to api.met.no, and the csmaps package for the
+# municipality's coordinates.
+weather_download_and_import_rawdata_data_selector(
+  argset = list(location_code = "municip_nor0301"),
+  tables = NULL
+)
+}
+}
+\seealso{
+\code{\link[=weather_download_and_import_rawdata_action]{weather_download_and_import_rawdata_action()}}, which consumes this
+list. cs9example has no vignettes of its own; how cs9 pairs a data selector
+with an action is documented in \link[cs9:SurveillanceSystem_v9]{cs9::SurveillanceSystem_v9}.
+
+Other cs9 task data selectors: 
+\code{\link{weather_clean_data_data_selector}()},
+\code{\link{weather_export_plots_data_selector}()}
+}
+\concept{cs9 task data selectors}

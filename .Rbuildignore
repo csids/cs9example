@@ -4,3 +4,9 @@ Makefile
 adhoc
 nul
 @eaDir
+^index\.md$
+^_pkgdown\.yml$
+^pkgdown$
+^dev$
+^Rplots\.pdf$
+^docs$

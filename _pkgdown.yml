@@ -1,0 +1,88 @@
+url: https://niphr.github.io/cs9example/
+
+# House style shared with the other cs* packages (cs9, csdata et al). The
+# cstemplate package supplies bootstrap 5, the typography, the palette, the
+# navbar/footer structure and the cs* family switcher. Everything under
+# `params: hero:` is this package's own copy for the home-page hero band. The
+# template picks up man/figures/logo.png by itself for the hero's art column;
+# regenerate that file with `Rscript dev/logo.R`.
+#
+# The hero sits above the home-page body, which pkgdown fills from index.md
+# (NOT README.md, which is the GitHub landing page and is deliberately thinner).
+#
+# cs9example has no vignettes of its own -- it *is* the worked example, and the
+# framework it demonstrates is documented in cs9. So the primary call to action
+# is this package's reference, and the secondary one leaves for the cs9
+# introduction, rather than the usual "Get started" article link.
+template:
+  package: cstemplate
+  params:
+    hero:
+      overline: "R package · cs9 skeleton"
+      title: "A worked Core Surveillance 9 system."
+      lede: >
+        A minimal but complete cs9 implementation. Three weather tasks download,
+        clean and plot, with the database tables, validators, skeletons and task
+        registration a real surveillance system needs — and nothing else.
+      cta:
+        primary:
+          text: "Browse the reference"
+          href: "reference/index.html"
+        secondary:
+          text: "Read the cs9 introduction →"
+          href: "https://niphr.github.io/cs9/articles/cs9.html"
+
+reference:
+- title: "The surveillance system"
+  desc: >
+    The package-wide environment that cs9example fills when it loads. It holds
+    the border year the package is configured for and the
+    `SurveillanceSystem_v9` object, with every table and task already
+    registered.
+  contents:
+  - global
+
+- title: "Task actions"
+  desc: >
+    One action per task, listed in pipeline order. Each takes the data its
+    selector returned, the argset for the current analysis, and the task's
+    database tables, then does the work: two write into a table, one writes a
+    PNG.
+  contents:
+  - weather_download_and_import_rawdata_action
+  - weather_clean_data_action
+  - weather_export_plots_action
+
+- title: "Task data selectors"
+  desc: >
+    One data selector per task, in the same order. Each runs once per plan,
+    before the action, and returns a named list that cs9 hands to the action as
+    its `data` argument.
+  contents:
+  - weather_download_and_import_rawdata_data_selector
+  - weather_clean_data_data_selector
+  - weather_export_plots_data_selector
+
+- title: "Skeleton builders"
+  desc: >
+    Build the complete location-by-time grid before any observation is merged
+    in, so a location or period with no data stays a visible row rather than
+    disappearing.
+  contents:
+  - make_skeleton_date
+  - make_skeleton_isoyearweek
+
+- title: internal
+  contents:
+  - set_definitions
+
+authors:
+  footer:
+    roles: [cre, aut]
+    text: "Crafted by"
+  sidebar:
+    roles: [cre, aut, cph]
+  before: "This package is proudly brought to you by:"
+  after: "See the [changelog](news/index.html) for other contributors. :pray:"
+  Richard Aubrey White:
+    href: "https://www.rwhite.no"

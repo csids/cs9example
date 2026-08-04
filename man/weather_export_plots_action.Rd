@@ -14,5 +14,43 @@ weather_export_plots_action(data, argset, tables)
 \item{tables}{DB tables}
 }
 \description{
-weather_export_plots (action)
+Creates \code{argset$output_dir}, draws \code{data$data} as a ribbon between \code{temp_min}
+and \code{temp_max} over \code{date}, and saves it with \code{\link[ggplot2:ggsave]{ggplot2::ggsave()}} to
+\code{argset$output_absolute_path}. That path is a \code{glue::glue()} template
+evaluated once against \code{argset}, so \code{"{argset$output_dir}"} resolves but a
+brace left inside \code{argset$output_filename} does not.
 }
+\details{
+This is the one action that touches no database table, so \code{tables} is unused
+and the example below passes \code{NULL} for it.
+}
+\examples{
+# An argset shaped like the one cs9 builds for this task, and a stand-in for
+# what the data selector would have returned.
+d <- list(data = data.table::data.table(
+  date = as.Date("2024-01-01") + 0:29,
+  temp_min = seq(-8, 6, length.out = 30),
+  temp_max = seq(-2, 12, length.out = 30)
+))
+argset <- list(
+  location_code = "county_nor03",
+  output_dir = fs::path(tempdir(), "cs9example-plots"),
+  output_filename = "weather_county_nor03.png",
+  output_absolute_path = fs::path("{argset$output_dir}", "{argset$output_filename}"),
+  first_analysis = TRUE,
+  last_analysis = TRUE
+)
+
+weather_export_plots_action(data = d, argset = argset, tables = NULL)
+fs::dir_ls(argset$output_dir)
+}
+\seealso{
+\code{\link[=weather_export_plots_data_selector]{weather_export_plots_data_selector()}}, which produces this action's
+\code{data} argument. cs9example has no vignettes of its own; how cs9 pairs an
+action with a data selector is documented in \link[cs9:SurveillanceSystem_v9]{cs9::SurveillanceSystem_v9}.
+
+Other cs9 task actions: 
+\code{\link{weather_clean_data_action}()},
+\code{\link{weather_download_and_import_rawdata_action}()}
+}
+\concept{cs9 task actions}

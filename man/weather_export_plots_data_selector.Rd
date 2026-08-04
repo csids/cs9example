@@ -11,6 +11,33 @@ weather_export_plots_data_selector(argset, tables)
 
 \item{tables}{DB tables}
 }
-\description{
-weather_export_plots (data selector)
+\value{
+A named list with one element, \code{data}: a \code{data.table} of \code{date},
+\code{temp_max} and \code{temp_min}.
 }
+\description{
+Pulls every row of \code{anon_example_weather_data} for the location named in
+\code{argset$location_code} and returns the date, \code{temp_max} and \code{temp_min}
+columns under the name \code{data}, ordered by date.
+}
+\examples{
+\dontrun{
+# Needs a live cs9 PostgreSQL database: it reads the
+# anon_example_weather_data table.
+weather_export_plots_data_selector(
+  argset = global$ss$shortcut_get_argset("weather_export_plots"),
+  tables = global$ss$shortcut_get_tables("weather_export_plots")
+)
+}
+}
+\seealso{
+\code{\link[=weather_export_plots_action]{weather_export_plots_action()}}, which consumes this list, and
+\code{\link[cs9:mandatory_db_filter]{cs9::mandatory_db_filter()}} for the filter it applies. cs9example has no
+vignettes of its own; how cs9 pairs a data selector with an action is
+documented in \link[cs9:SurveillanceSystem_v9]{cs9::SurveillanceSystem_v9}.
+
+Other cs9 task data selectors: 
+\code{\link{weather_clean_data_data_selector}()},
+\code{\link{weather_download_and_import_rawdata_data_selector}()}
+}
+\concept{cs9 task data selectors}

@@ -1,8 +1,26 @@
 # **** action **** ----
 #' weather_clean_data (action)
+#'
+#' Lays out a complete municipality-by-date skeleton with [make_skeleton_date()],
+#' merges the raw weather onto it, aggregates it up to county and to nation, and
+#' aggregates the whole lot up again to ISO year-week. Both granularities are
+#' formatted as csfmt_rts_data_v2, stacked, and written to
+#' `anon_example_weather_data`, replacing whatever was there.
+#'
 #' @param data Data
 #' @param argset Argset
 #' @param tables DB tables
+#' @family cs9 task actions
+#' @seealso [weather_clean_data_data_selector()], which produces this action's
+#'   `data` argument, and [make_skeleton_date()] for the skeleton it starts
+#'   from. cs9example has no vignettes of its own; how cs9 pairs an action with
+#'   a data selector is documented in [cs9::SurveillanceSystem_v9].
+#' @examples
+#' \dontrun{
+#' # Needs a live cs9 PostgreSQL database: the action ends by dropping every row
+#' # of anon_example_weather_data and inserting the cleaned data in its place.
+#' global$ss$run_task("weather_clean_data")
+#' }
 #' @export
 weather_clean_data_action <- function(data, argset, tables) {
   # cs9::run_task_sequentially_as_rstudio_job_using_load_all("weather_clean_data")
@@ -14,15 +32,20 @@ weather_clean_data_action <- function(data, argset, tables) {
     index_plan <- 1
     index_analysis <- 1
 
-    data <- global$ss$shortcut_get_data("weather_clean_data", index_plan = index_plan)
-    argset <- global$ss$shortcut_get_argset("weather_clean_data", index_plan = index_plan, index_analysis = index_analysis)
+    data <- global$ss$shortcut_get_data(
+      "weather_clean_data",
+      index_plan = index_plan
+    )
+    argset <- global$ss$shortcut_get_argset(
+      "weather_clean_data",
+      index_plan = index_plan,
+      index_analysis = index_analysis
+    )
     tables <- global$ss$shortcut_get_tables("weather_clean_data")
   }
 
   # special case that runs before everything
-  if (argset$first_analysis == TRUE) {
-
-  }
+  if (argset$first_analysis == TRUE) {}
 
   # Pull out important dates
   date_min <- min(data$date_municip$date, na.rm = T)
@@ -79,8 +102,7 @@ weather_clean_data_action <- function(data, argset, tables) {
   multiskeleton_date$county[]
 
   # Aggregate up to higher geographical granularities (nation)
-  multiskeleton_date$nation <- multiskeleton_date$municip[
-    ,
+  multiskeleton_date$nation <- multiskeleton_date$municip[,
     .(
       temp_max = mean(temp_max, na.rm = T),
       temp_min = mean(temp_min, na.rm = T),
@@ -105,8 +127,7 @@ weather_clean_data_action <- function(data, argset, tables) {
   # if necessary, it is now easy to aggregate up to weekly data from here
   skeleton_isoyearweek <- copy(skeleton_date)
   skeleton_isoyearweek[, isoyearweek := cstime::date_to_isoyearweek_c(date)]
-  skeleton_isoyearweek <- skeleton_isoyearweek[
-    ,
+  skeleton_isoyearweek <- skeleton_isoyearweek[,
     .(
       temp_max = mean(temp_max, na.rm = T),
       temp_min = mean(temp_min, na.rm = T),
@@ -147,15 +168,35 @@ weather_clean_data_action <- function(data, argset, tables) {
   tables$anon_example_weather_data$drop_all_rows_and_then_insert_data(skeleton)
 
   # special case that runs after everything
-  if (argset$last_analysis == TRUE) {
-
-  }
+  if (argset$last_analysis == TRUE) {}
 }
 
 # **** data_selector **** ----
 #' weather_clean_data (data selector)
+#'
+#' Pulls the daily, municipality-level, total-age, total-sex rows out of
+#' `anon_example_weather_rawdata` and returns them under the name
+#' `date_municip`, ordered by location and date.
+#'
 #' @param argset Argset
 #' @param tables DB tables
+#' @return A named list with one element, `date_municip`: a `data.table` of
+#'   `granularity_time`, `location_code`, `date`, `temp_max`, `temp_min` and
+#'   `precip`.
+#' @family cs9 task data selectors
+#' @seealso [weather_clean_data_action()], which consumes this list, and
+#'   [cs9::mandatory_db_filter()] for the filter it applies. cs9example has no
+#'   vignettes of its own; how cs9 pairs a data selector with an action is
+#'   documented in [cs9::SurveillanceSystem_v9].
+#' @examples
+#' \dontrun{
+#' # Needs a live cs9 PostgreSQL database: it reads the
+#' # anon_example_weather_rawdata table.
+#' weather_clean_data_data_selector(
+#'   argset = global$ss$shortcut_get_argset("weather_clean_data"),
+#'   tables = global$ss$shortcut_get_tables("weather_clean_data")
+#' )
+#' }
 #' @export
 weather_clean_data_data_selector <- function(argset, tables) {
   if (plnr::is_run_directly()) {
@@ -163,7 +204,10 @@ weather_clean_data_data_selector <- function(argset, tables) {
 
     index_plan <- 1
 
-    argset <- global$ss$shortcut_get_argset("weather_clean_data", index_plan = index_plan)
+    argset <- global$ss$shortcut_get_argset(
+      "weather_clean_data",
+      index_plan = index_plan
+    )
     tables <- global$ss$shortcut_get_tables("weather_clean_data")
   }
 

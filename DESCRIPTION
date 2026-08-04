@@ -1,6 +1,6 @@
 Package: cs9example
 Title: A skeleton implementation of cs9 (Core Surveillance 9)
-Version: 25.6.24
+Version: 26.8.4
 Authors@R: c(
   person(
     given = c("Richard", "Aubrey"),
@@ -36,4 +36,5 @@ VignetteBuilder:
     knitr
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.2
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3

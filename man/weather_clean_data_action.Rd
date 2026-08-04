@@ -14,5 +14,27 @@ weather_clean_data_action(data, argset, tables)
 \item{tables}{DB tables}
 }
 \description{
-weather_clean_data (action)
+Lays out a complete municipality-by-date skeleton with \code{\link[=make_skeleton_date]{make_skeleton_date()}},
+merges the raw weather onto it, aggregates it up to county and to nation, and
+aggregates the whole lot up again to ISO year-week. Both granularities are
+formatted as csfmt_rts_data_v2, stacked, and written to
+\code{anon_example_weather_data}, replacing whatever was there.
 }
+\examples{
+\dontrun{
+# Needs a live cs9 PostgreSQL database: the action ends by dropping every row
+# of anon_example_weather_data and inserting the cleaned data in its place.
+global$ss$run_task("weather_clean_data")
+}
+}
+\seealso{
+\code{\link[=weather_clean_data_data_selector]{weather_clean_data_data_selector()}}, which produces this action's
+\code{data} argument, and \code{\link[=make_skeleton_date]{make_skeleton_date()}} for the skeleton it starts
+from. cs9example has no vignettes of its own; how cs9 pairs an action with
+a data selector is documented in \link[cs9:SurveillanceSystem_v9]{cs9::SurveillanceSystem_v9}.
+
+Other cs9 task actions: 
+\code{\link{weather_download_and_import_rawdata_action}()},
+\code{\link{weather_export_plots_action}()}
+}
+\concept{cs9 task actions}

@@ -11,6 +11,24 @@ An object of class \code{environment} of length 2.
 global
 }
 \description{
-Declaration of environments that can be used globally
+\code{global} is created empty and filled when cs9example is loaded. It holds two
+things every task needs: \code{global$border}, the Norwegian border year the
+package is configured for, and \code{global$ss}, a
+\link[cs9:SurveillanceSystem_v9]{cs9::SurveillanceSystem_v9} object with every database table and every task
+already registered.
+}
+\examples{
+# The border year, set when the package loads.
+global$border
+
+# The two tables and the three tasks the package registers.
+names(global$ss$tables)
+names(global$ss$tasks)
+}
+\seealso{
+\link[cs9:SurveillanceSystem_v9]{cs9::SurveillanceSystem_v9} for the class \code{global$ss} is an
+instance of, and \code{\link[=make_skeleton_date]{make_skeleton_date()}} for the skeleton builder the tasks
+use. cs9example has no vignettes of its own; the framework is documented in
+the cs9 package.
 }
 \keyword{datasets}

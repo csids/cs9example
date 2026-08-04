@@ -1,4 +1,10 @@
-# cs9example (development version)
+# cs9example 26.8.4
+
+- Added a pkgdown site: `_pkgdown.yml` on the `cstemplate` house template, an `index.md` home page, and a generated hex logo (`dev/logo.R` -> `man/figures/logo.png`).
+- Documented every exported function with a description, `@seealso` and `@family`, and added runnable examples where one can run without a database. `weather_export_plots_action()`, `make_skeleton_date()`, `make_skeleton_isoyearweek()` and `global` now have examples that execute; the five that need a live PostgreSQL database or internet access are marked `\dontrun{}` and say why.
+- `make_skeleton_date()` and `make_skeleton_isoyearweek()` are now actually exported. Both carried `@export` since they were added, but `NAMESPACE` had not been regenerated, so neither was reachable as `cs9example::make_skeleton_date()`.
+
+# cs9example 25.6.24
 
 - Updated database schema to include quarterly fields (isoquarter, isoyearquarter)
 - Upgraded table validators from v1 to v2 format
