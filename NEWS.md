@@ -19,6 +19,28 @@
   to be on the search path. Loading died there first, which is why the
   `assignInNamespace()` defect behind it had never been seen. Fixed in plnr
   2026.8.3.
+- `DESCRIPTION` now carries `Remotes: niphr/cs9, raubreywhite/plnr`. Without it
+  CI died before `R CMD check` ever started: pak reported `Can't find package
+  called cs9`, because `cs9` is in `Imports:` and is not on CRAN. `plnr` is on
+  CRAN, but only at 2025.11.22, which still reads the undefined `df` in
+  `Plan$add_analysis_from_list()`. Resolving `plnr` from CRAN therefore installs
+  a version that makes `.onLoad()` die with `object 'df' not found` whenever
+  `stats` is not attached, which is exactly the condition `R CMD check` uses for
+  `checking whether the package can be loaded with stated dependencies`. Note the
+  two different owners: `cs9` is `niphr/cs9`, `plnr` is `raubreywhite/plnr`.
+  `csdb` needs no entry of its own. cs9 declares `csdb (>= 2026.8.5)` together
+  with `Remotes: niphr/csdb`, and pak follows that transitively, so `csdb`
+  resolves from GitHub at 2026.8.5 rather than the CRAN 2026.5.13.
+- `DESCRIPTION` now declares `Config/Needs/website: niphr/cstemplate`, which was
+  missing. `_pkgdown.yml` sets `template: package: cstemplate`, cstemplate is not
+  on CRAN, and nothing else in the package named it, so the pkgdown build had no
+  template to load. The gap stayed invisible because the `pkgdown` job in
+  `.github/workflows/check-and-pkgdown.yml` has `needs: R-CMD-check` and so never
+  ran while dependency resolution was failing. This is a third inline GitHub ref
+  with a third owner: `r-lib/actions/setup-r-dependencies` reads this field for
+  its `needs: website` step. Ordinary `Imports:` resolution does not read it, so
+  it is not interchangeable with a `Remotes:` entry. cs9 and csdb declare the
+  same value; plnr declares `raubreywhite/pkgdowntemplate`.
 - `DESCRIPTION` `Imports:` now matches what the code actually uses. Nine
   namespaces were reached through `::` without being declared, and are now
   declared: `csdb`, `csmaps`, `cstidy`, `cstime`, `glue`, `httr`, `plnr`,
