@@ -2,6 +2,16 @@
 
 ## cs9example 26.8.5
 
+- Removed `no_data_plot()`, and with it `R/99_util_no_data_plot.R`. It
+  was never exported and never called, which is why a stale `fhi::`
+  reference survived inside it undetected for so long: the name sat in a
+  `glue()` string, where static analysis cannot see it. Deleting it
+  removes the whole class of problem rather than the one instance.
+- Removed `knitr` from `Suggests` and dropped the `VignetteBuilder`
+  field. The package ships no vignettes, so both were vestigial and
+  `R CMD check` reported the mismatch. `rmarkdown` stays in `Imports`:
+  it is a genuine load-time dependency, named by a string in
+  `assignInNamespace(ns = "rmarkdown")`.
 - [`library(cs9example)`](https://www.csids.no/cs9/) now runs with no
   database server and no `.Renviron`. When `CS9_DBCONFIG_ACCESS` is
   empty, `.onLoad()` configures a SQLite backend under

@@ -47,7 +47,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="26.8.5" id="cs9example-2685">cs9example 26.8.5<a class="anchor" aria-label="anchor" href="#cs9example-2685"></a></h2>
-<ul><li>
+<ul><li>Removed <code>no_data_plot()</code>, and with it <code>R/99_util_no_data_plot.R</code>. It was never exported and never called, which is why a stale <code>fhi::</code> reference survived inside it undetected for so long: the name sat in a <code>glue()</code> string, where static analysis cannot see it. Deleting it removes the whole class of problem rather than the one instance.</li>
+<li>Removed <code>knitr</code> from <code>Suggests</code> and dropped the <code>VignetteBuilder</code> field. The package ships no vignettes, so both were vestigial and <code>R CMD check</code> reported the mismatch. <code>rmarkdown</code> stays in <code>Imports</code>: it is a genuine load-time dependency, named by a string in <code>assignInNamespace(ns = "rmarkdown")</code>.</li>
+<li>
 <code><a href="https://www.csids.no/cs9/" class="external-link">library(cs9example)</a></code> now runs with no database server and no <code>.Renviron</code>. When <code>CS9_DBCONFIG_ACCESS</code> is empty, <code>.onLoad()</code> configures a SQLite backend under <code>file.path(tempdir(), "cs9example")</code> and calls <code><a href="https://niphr.github.io/cs9/reference/reload_db_config.html" class="external-link">cs9::reload_db_config()</a></code>, so both tables register against SQLite files. A <code>.Renviron</code> still wins: the defaults are only applied when the variable is empty.</li>
 <li>Added a test suite. <code>tests/testthat/test-sqlite-roundtrip.R</code> asserts that both tables register, that they are backed by SQLite, that the <code>config</code> and <code>anon</code> accesses use different SQLite files, and that a synthetic row round-trips through <code>insert_data()</code> and <code>tbl()</code>. It needs no database server and no network.</li>
 <li>
