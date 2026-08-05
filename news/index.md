@@ -92,6 +92,46 @@
   clears `R CMD check`’s
   `Malformed Description field: should contain one or more complete sentences.`
   The wording is unchanged.
+- Fixed
+  [`weather_export_plots_data_selector()`](https://niphr.github.io/cs9example/reference/weather_export_plots_data_selector.md),
+  which read `index_analysis` without ever assigning it. The
+  `if (plnr::is_run_directly())` block set only `index_plan <- 1`, then
+  passed `index_analysis` to `global$ss$shortcut_get_argset()`. The
+  three sibling blocks all assign it first. This was a copy from the
+  action body with the `index_analysis <- 1` line dropped. The guard is
+  FALSE under normal package use, so the defect never fired in
+  production. It fired the moment a developer stepped through the data
+  selector interactively, which is the only reason the block exists: R
+  then either raised `object 'index_analysis' not found` or silently
+  used a stale value left in the global environment. Note that
+  [`weather_clean_data_data_selector()`](https://niphr.github.io/cs9example/reference/weather_clean_data_data_selector.md)
+  is correct as written and is unchanged. It omits `index_analysis` from
+  the call entirely, which is the other valid shape.
+- `no_data_plot()` no longer calls `fhi::nb$aa`. `fhi` is not a declared
+  dependency and is not installed, so the function raised
+  `Failed to evaluate glue component {fhi::nb$aa}` on every call. No
+  static analysis could see it, because the name sits inside a
+  [`glue::glue()`](https://glue.tidyverse.org/reference/glue.html)
+  string. The value is the character `å`, confirmed against
+  `csdata::nb$aa` and against the same function in norsyss.cs9, which
+  had already made this exact substitution. The literal replaces the
+  call, so the label reads `Ikke noe data å vise` as intended. `fhi` was
+  not added to `Imports:`.
+- `R/00_env_and_namespace.R` now declares the data.table and dplyr
+  non-standard-evaluation column names in
+  [`utils::globalVariables()`](https://rdrr.io/r/utils/globalVariables.html).
+  Fourteen names were reported by
+  `checking R code for possible problems` and each was traced to a
+  `[...]`, `:=` or
+  [`dplyr::select()`](https://dplyr.tidyverse.org/reference/select.html)
+  site before being declared. `index_analysis` was deliberately left
+  out: it was a real bug, fixed above, not NSE. The check’s
+  `importFrom("datasets", "precip")` suggestion was not followed,
+  because `precip` here is a weather column this package builds.
+- `.Rbuildignore` now excludes `.github` and `LICENSE.md`, which cleared
+  `checking for hidden files and directories` and
+  `checking top-level files`. The `LICENSE` file named by
+  `License: MIT + file LICENSE` still ships.
 
 ## cs9example 26.8.4
 
