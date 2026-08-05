@@ -110,6 +110,7 @@ weather_export_plots_data_selector <- function(argset, tables) {
     # global$ss$shortcut_get_plans_argsets_as_dt("weather_export_plots")
 
     index_plan <- 1
+    index_analysis <- 1
 
     argset <- global$ss$shortcut_get_argset(
       "weather_export_plots",

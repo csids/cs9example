@@ -24,6 +24,27 @@
 #' @importFrom magrittr %>% %<>%
 1
 
+# data.table and dplyr use non-standard evaluation, so column names referenced
+# inside `[...]` and inside dplyr::select() look like undefined globals to
+# R CMD check. Declaring them here keeps "checking R code for possible
+# problems" clean without touching the code.
+utils::globalVariables(c(
+  ".",
+  "age",
+  "border",
+  "granularity_geo",
+  "granularity_time",
+  "isoyearweek",
+  "lat",
+  "location_code",
+  "long",
+  "precip",
+  "sex",
+  "temp_max",
+  "temp_min",
+  "to_code"
+))
+
 #' Declaration of environments that can be used globally
 #'
 #' `global` is created empty and filled when cs9example is loaded. It holds two

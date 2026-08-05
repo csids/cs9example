@@ -4,9 +4,11 @@ Makefile
 adhoc
 nul
 @eaDir
+LICENSE.md
 ^index\.md$
 ^_pkgdown\.yml$
 ^pkgdown$
 ^dev$
 ^Rplots\.pdf$
 ^docs$
+^\.github$
