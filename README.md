@@ -4,36 +4,31 @@
 
 Read the introduction vignette [here](https://www.csids.no/cs9/articles/cs9.html) or run `help(package="cs9")`.
 
-## Interactive Usage in Posit Studio/Workbench
+## No `.Renviron` is needed
 
-If you are running this interactively in Posit Studio/Workbench, you need to set up your environment variables. Run the following command:
+`library(cs9example)` runs on a bare machine. When `CS9_DBCONFIG_ACCESS` is empty, the package configures itself against SQLite files under `file.path(tempdir(), "cs9example")` and needs no database server and no `.Renviron`.
+
+## Pointing it at your own database
+
+A `.Renviron` always wins, because the defaults are only applied when `CS9_DBCONFIG_ACCESS` is empty. The override is all or nothing: set `CS9_DBCONFIG_ACCESS` and you own the whole configuration, because none of the other defaults are supplied and a partial one fails to load. Open the file with:
 
 ```r
 usethis::edit_r_environ("project")
 ```
 
-Then add these environment variables to the `.Renviron` file:
+Then add these environment variables to keep SQLite but choose the two file paths yourself:
 
 ```
-CS9_DBCONFIG_USER='yourusername'
-CS9_DBCONFIG_PASSWORD='yourStrongPassword100'
-
 CS9_AUTO=0
 CS9_PATH='/cs9path'
 
 CS9_DBCONFIG_ACCESS='config/anon'
-CS9_DBCONFIG_DRIVER='PostgreSQL Unicode'
-CS9_DBCONFIG_PORT='5432'
+CS9_DBCONFIG_DRIVER='SQLite'
 
-CS9_DBCONFIG_SSLMODE='no'
-CS9_DBCONFIG_ROLE_CREATE_TABLE='yourusername'
-CS9_DBCONFIG_SERVER='db'
-
-CS9_DBCONFIG_SCHEMA_CONFIG='public'
-CS9_DBCONFIG_DB_CONFIG='postgres'
-
-CS9_DBCONFIG_SCHEMA_ANON='public'
-CS9_DBCONFIG_DB_ANON='postgres'
+CS9_DBCONFIG_DB_CONFIG='/cs9path/config.sqlite'
+CS9_DBCONFIG_DB_ANON='/cs9path/anon.sqlite'
 ```
+
+SQLite reads none of `CS9_DBCONFIG_SERVER`, `CS9_DBCONFIG_PORT`, `CS9_DBCONFIG_USER`, `CS9_DBCONFIG_PASSWORD` or any `CS9_DBCONFIG_SCHEMA_*`. For a PostgreSQL configuration instead, see `vignette("installation", package = "cs9")`.
 
 After adding these variables, restart your R session for the changes to take effect.
