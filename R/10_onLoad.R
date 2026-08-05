@@ -62,7 +62,11 @@
   ))
 
   # https://github.com/rstudio/rmarkdown/issues/1632
-  assignInNamespace("clean_tmpfiles", clean_tmpfiles_mod, ns = "rmarkdown")
+  utils::assignInNamespace(
+    "clean_tmpfiles",
+    clean_tmpfiles_mod,
+    ns = "rmarkdown"
+  )
 
   invisible()
 }
