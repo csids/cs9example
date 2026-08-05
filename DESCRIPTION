@@ -34,15 +34,12 @@ Imports:
     plnr,
     progressr,
     stringr
-Suggests: 
-    knitr,
+Suggests:
     testthat,
     usethis
 Remotes:
     niphr/cs9,
     raubreywhite/plnr
-VignetteBuilder: 
-    knitr
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

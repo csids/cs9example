@@ -1,5 +1,14 @@
 # cs9example 26.8.5
 
+- Removed `no_data_plot()`, and with it `R/99_util_no_data_plot.R`. It was never
+  exported and never called, which is why a stale `fhi::` reference survived
+  inside it undetected for so long: the name sat in a `glue()` string, where
+  static analysis cannot see it. Deleting it removes the whole class of problem
+  rather than the one instance.
+- Removed `knitr` from `Suggests` and dropped the `VignetteBuilder` field. The
+  package ships no vignettes, so both were vestigial and `R CMD check` reported
+  the mismatch. `rmarkdown` stays in `Imports`: it is a genuine load-time
+  dependency, named by a string in `assignInNamespace(ns = "rmarkdown")`.
 - `library(cs9example)` now runs with no database server and no `.Renviron`. When `CS9_DBCONFIG_ACCESS` is empty, `.onLoad()` configures a SQLite backend under `file.path(tempdir(), "cs9example")` and calls `cs9::reload_db_config()`, so both tables register against SQLite files. A `.Renviron` still wins: the defaults are only applied when the variable is empty.
 - Added a test suite. `tests/testthat/test-sqlite-roundtrip.R` asserts that both tables register, that they are backed by SQLite, that the `config` and `anon` accesses use different SQLite files, and that a synthetic row round-trips through `insert_data()` and `tbl()`. It needs no database server and no network.
 - `README.md` no longer tells the reader to hand-write a PostgreSQL `.Renviron` before anything works.
