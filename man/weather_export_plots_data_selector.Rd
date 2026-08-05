@@ -36,8 +36,8 @@ weather_export_plots_data_selector(
 vignettes of its own; how cs9 pairs a data selector with an action is
 documented in \link[cs9:SurveillanceSystem_v9]{cs9::SurveillanceSystem_v9}.
 
-Other cs9 task data selectors: 
-\code{\link{weather_clean_data_data_selector}()},
-\code{\link{weather_download_and_import_rawdata_data_selector}()}
+Other cs9 task data selectors:
+\code{\link[=weather_clean_data_data_selector]{weather_clean_data_data_selector()}},
+\code{\link[=weather_download_and_import_rawdata_data_selector]{weather_download_and_import_rawdata_data_selector()}}
 }
 \concept{cs9 task data selectors}

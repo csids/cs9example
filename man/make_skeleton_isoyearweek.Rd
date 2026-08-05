@@ -43,7 +43,7 @@ head(skeleton)
 cs9example has no vignettes of its own; the framework is documented in the
 cs9 package.
 
-Other skeleton builders: 
-\code{\link{make_skeleton_date}()}
+Other skeleton builders:
+\code{\link[=make_skeleton_date]{make_skeleton_date()}}
 }
 \concept{skeleton builders}

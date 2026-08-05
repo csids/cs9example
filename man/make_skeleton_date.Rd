@@ -44,7 +44,7 @@ skeleton, and \code{\link[csdata:nor_locations_names]{csdata::nor_locations_name
 reference. cs9example has no vignettes of its own; the framework is
 documented in the cs9 package.
 
-Other skeleton builders: 
-\code{\link{make_skeleton_isoyearweek}()}
+Other skeleton builders:
+\code{\link[=make_skeleton_isoyearweek]{make_skeleton_isoyearweek()}}
 }
 \concept{skeleton builders}

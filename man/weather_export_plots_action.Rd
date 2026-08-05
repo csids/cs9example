@@ -49,8 +49,8 @@ fs::dir_ls(argset$output_dir)
 \code{data} argument. cs9example has no vignettes of its own; how cs9 pairs an
 action with a data selector is documented in \link[cs9:SurveillanceSystem_v9]{cs9::SurveillanceSystem_v9}.
 
-Other cs9 task actions: 
-\code{\link{weather_clean_data_action}()},
-\code{\link{weather_download_and_import_rawdata_action}()}
+Other cs9 task actions:
+\code{\link[=weather_clean_data_action]{weather_clean_data_action()}},
+\code{\link[=weather_download_and_import_rawdata_action]{weather_download_and_import_rawdata_action()}}
 }
 \concept{cs9 task actions}
