@@ -1,5 +1,10 @@
 # cs9example 26.8.6
 
+- Fixed two `README.md` links that pointed at `www.csids.no`. The introduction
+  vignette link returned 404 there. Both now point at `niphr.github.io`, which
+  is the URL cs9's own `DESCRIPTION` and `_pkgdown.yml` declare, and which
+  returns 200.
+
 - Brought the prose in `R/`, `README.md`, `index.md` and `NEWS.md` to the house
   standard: ASD-STE100 (Simplified Technical English), adapted. Split the long
   sentences, and turned the buried lists into real lists.

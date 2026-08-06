@@ -1,8 +1,8 @@
 # CS9 Example
 
-[Core Surveillance 9](https://www.csids.no/cs9/) ("cs9") is a free and open-source framework for real-time analysis and disease surveillance.
+[Core Surveillance 9](https://niphr.github.io/cs9/) ("cs9") is a free and open-source framework for real-time analysis and disease surveillance.
 
-Read the [introduction vignette](https://www.csids.no/cs9/articles/cs9.html), or run `help(package="cs9")`.
+Read the [introduction vignette](https://niphr.github.io/cs9/articles/cs9.html), or run `help(package="cs9")`.
 
 ## No `.Renviron` is needed
 
