@@ -1,5 +1,16 @@
 # cs9example 26.8.6
 
+## Licensing
+
+- The copyright holder is now **Folkehelseinstituttet**. It read "cs9example authors", which
+  was a template placeholder.
+- `DESCRIPTION` `Authors@R` now declares that holder with `role = "cph"`.
+  It declared no copyright holder at all, and neither did any other package
+  in the fleet. Nothing in `R CMD check` reports that.
+- The copyright year is now 2026. It read 2021.
+- `CLAUDE.md` now carries a Licensing section, so the year gets checked
+  rather than silently ageing.
+
 - Fixed two `README.md` links that pointed at `www.csids.no`. The introduction
   vignette link returned 404 there. Both now point at `niphr.github.io`, which
   is the URL cs9's own `DESCRIPTION` and `_pkgdown.yml` declare, and which

@@ -12,3 +12,4 @@ LICENSE.md
 ^Rplots\.pdf$
 ^docs$
 ^\.github$
+^CLAUDE\.md$

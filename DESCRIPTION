@@ -1,15 +1,20 @@
 Package: cs9example
 Title: A skeleton implementation of cs9 (Core Surveillance 9)
 Version: 26.8.6
-Authors@R: c(
-  person(
-    given = c("Richard", "Aubrey"),
-    family = "White",
-    role = c("aut", "cre"),
-    email = "hello@rwhite.no",
-    comment = c(ORCID = "0000-0002-6747-1726")
-  )
-  )
+Authors@R:
+    c(
+      person(
+        given = c("Richard", "Aubrey"),
+        family = "White",
+        email = "hello@rwhite.no",
+        role = c("aut", "cre"),
+        comment = c(ORCID = "0000-0002-6747-1726")
+      ),
+      person(
+        given = "Folkehelseinstituttet",
+        role = "cph"
+      )
+    )
 Description: A skeleton implementation of cs9 (Surveillance Core 9).
 License: MIT + file LICENSE
 URL: https://www.csids.no/cs9/
