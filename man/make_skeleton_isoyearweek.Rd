@@ -24,8 +24,8 @@ make_skeleton_isoyearweek(
 data.table with complete skeleton
 }
 \description{
-Creates a comprehensive data skeleton with complete ISO year-week sequences and location codes
-for specified geographic granularities.
+Creates a data skeleton with complete ISO year-week sequences and location
+codes for the geographic granularities you specify.
 }
 \examples{
 # Every county, the first three ISO weeks of 2024: 15 counties x 3 weeks.

@@ -24,8 +24,8 @@ make_skeleton_date(
 data.table with complete skeleton
 }
 \description{
-Creates a comprehensive data skeleton with complete date sequences and location codes
-for specified geographic granularities.
+Creates a data skeleton with complete date sequences and location codes for
+the geographic granularities you specify.
 }
 \examples{
 # Every county, every day of the first week of 2024, with no data merged in

@@ -15,9 +15,9 @@ weather_download_and_import_rawdata_action(data, argset, tables)
 }
 \description{
 Keeps the 00, 06, 12 and 18 o'clock timepoints of the forecast that
-\code{\link[=weather_download_and_import_rawdata_data_selector]{weather_download_and_import_rawdata_data_selector()}} returned, reduces them
-to one row per date (maximum and minimum air temperature, total
-precipitation) and upserts those rows into \code{anon_example_weather_rawdata}.
+\code{\link[=weather_download_and_import_rawdata_data_selector]{weather_download_and_import_rawdata_data_selector()}} returned. Reduces them
+to one row per date: maximum air temperature, minimum air temperature and
+total precipitation. Upserts those rows into \code{anon_example_weather_rawdata}.
 }
 \examples{
 \dontrun{

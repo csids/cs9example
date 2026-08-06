@@ -47,9 +47,9 @@ utils::globalVariables(c(
 
 #' Declaration of environments that can be used globally
 #'
-#' `global` is created empty and filled when cs9example is loaded. It holds two
-#' things every task needs: `global$border`, the Norwegian border year the
-#' package is configured for, and `global$ss`, a
+#' cs9example creates `global` empty, and fills it when the package loads. It
+#' holds two things every task needs. `global$border` is the Norwegian border
+#' year the package is configured for. `global$ss` is a
 #' [cs9::SurveillanceSystem_v9] object with every database table and every task
 #' already registered.
 #'

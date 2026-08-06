@@ -7,9 +7,9 @@
 global
 }
 \description{
-\code{global} is created empty and filled when cs9example is loaded. It holds two
-things every task needs: \code{global$border}, the Norwegian border year the
-package is configured for, and \code{global$ss}, a
+cs9example creates \code{global} empty, and fills it when the package loads. It
+holds two things every task needs. \code{global$border} is the Norwegian border
+year the package is configured for. \code{global$ss} is a
 \link[cs9:SurveillanceSystem_v9]{cs9::SurveillanceSystem_v9} object with every database table and every task
 already registered.
 }

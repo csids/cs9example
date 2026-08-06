@@ -1,11 +1,12 @@
 # **** action **** ----
 #' weather_clean_data (action)
 #'
-#' Lays out a complete municipality-by-date skeleton with [make_skeleton_date()],
-#' merges the raw weather onto it, aggregates it up to county and to nation, and
-#' aggregates the whole lot up again to ISO year-week. Both granularities are
-#' formatted as csfmt_rts_data_v2, stacked, and written to
-#' `anon_example_weather_data`, replacing whatever was there.
+#' Lays out a complete municipality-by-date skeleton with
+#' [make_skeleton_date()]. Merges the raw weather onto that skeleton.
+#' Aggregates it up to county and to nation. Aggregates the whole lot up again
+#' to ISO year-week. The action formats both granularities as
+#' csfmt_rts_data_v2, stacks them, and writes them to
+#' `anon_example_weather_data`. The write replaces whatever was there.
 #'
 #' @param data Data
 #' @param argset Argset
@@ -175,8 +176,8 @@ weather_clean_data_action <- function(data, argset, tables) {
 #' weather_clean_data (data selector)
 #'
 #' Pulls the daily, municipality-level, total-age, total-sex rows out of
-#' `anon_example_weather_rawdata` and returns them under the name
-#' `date_municip`, ordered by location and date.
+#' `anon_example_weather_rawdata`. Returns them under the name `date_municip`,
+#' ordered by location and date.
 #'
 #' @param argset Argset
 #' @param tables DB tables

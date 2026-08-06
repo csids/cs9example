@@ -2,9 +2,9 @@
 #' weather_download_and_import_rawdata (action)
 #'
 #' Keeps the 00, 06, 12 and 18 o'clock timepoints of the forecast that
-#' [weather_download_and_import_rawdata_data_selector()] returned, reduces them
-#' to one row per date (maximum and minimum air temperature, total
-#' precipitation) and upserts those rows into `anon_example_weather_rawdata`.
+#' [weather_download_and_import_rawdata_data_selector()] returned. Reduces them
+#' to one row per date: maximum air temperature, minimum air temperature and
+#' total precipitation. Upserts those rows into `anon_example_weather_rawdata`.
 #'
 #' @param data Data
 #' @param argset Argset
@@ -107,8 +107,8 @@ weather_download_and_import_rawdata_action <- function(data, argset, tables) {
 #' weather_download_and_import_rawdata (data selector)
 #'
 #' Takes the mean latitude and longitude of the municipality named in
-#' `argset$location_code`, then downloads the MET Norway location forecast for
-#' that point. Returns it under the name `data`.
+#' `argset$location_code`. Downloads the MET Norway location forecast for that
+#' point. Returns it under the name `data`.
 #'
 #' @param argset Argset
 #' @param tables DB tables

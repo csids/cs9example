@@ -18,8 +18,8 @@ A named list with one element, \code{date_municip}: a \code{data.table} of
 }
 \description{
 Pulls the daily, municipality-level, total-age, total-sex rows out of
-\code{anon_example_weather_rawdata} and returns them under the name
-\code{date_municip}, ordered by location and date.
+\code{anon_example_weather_rawdata}. Returns them under the name \code{date_municip},
+ordered by location and date.
 }
 \examples{
 \dontrun{

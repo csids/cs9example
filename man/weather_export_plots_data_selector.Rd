@@ -17,7 +17,7 @@ A named list with one element, \code{data}: a \code{data.table} of \code{date},
 }
 \description{
 Pulls every row of \code{anon_example_weather_data} for the location named in
-\code{argset$location_code} and returns the date, \code{temp_max} and \code{temp_min}
+\code{argset$location_code}. Returns the \code{date}, \code{temp_max} and \code{temp_min}
 columns under the name \code{data}, ordered by date.
 }
 \examples{

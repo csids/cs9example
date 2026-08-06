@@ -1,7 +1,7 @@
 #' Create Date-Based Data Skeleton
 #'
-#' Creates a comprehensive data skeleton with complete date sequences and location codes
-#' for specified geographic granularities.
+#' Creates a data skeleton with complete date sequences and location codes for
+#' the geographic granularities you specify.
 #'
 #' @param date_min Start date (Date or character in YYYY-MM-DD format)
 #' @param date_max End date (Date or character in YYYY-MM-DD format)
@@ -88,8 +88,8 @@ make_skeleton_date <- function(
 
 #' Create ISO Year-Week Data Skeleton
 #'
-#' Creates a comprehensive data skeleton with complete ISO year-week sequences and location codes
-#' for specified geographic granularities.
+#' Creates a data skeleton with complete ISO year-week sequences and location
+#' codes for the geographic granularities you specify.
 #'
 #' @param isoyearweek_min Start ISO year-week (character in YYYY-WW format)
 #' @param isoyearweek_max End ISO year-week (character in YYYY-WW format)

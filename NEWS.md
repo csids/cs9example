@@ -1,8 +1,23 @@
+# cs9example 26.8.6
+
+- Brought the prose in `R/`, `README.md`, `index.md` and `NEWS.md` to the house
+  standard: ASD-STE100 (Simplified Technical English), adapted. Split the long
+  sentences, and turned the buried lists into real lists.
+  - Sentences over 25 words, measured per authored unit, before and after:
+    `R/` 4 to 0, `README.md` 1 to 0, `NEWS.md` 12 to 0. `index.md` was already
+    at 0.
+  - Regenerated `man/` from the edited roxygen. `NAMESPACE` is unchanged, and
+    all 10 help pages remain.
+  - `index.md` keeps the `cs-*` class names, which are the ones `cstemplate`
+    defines. An `rw-*` prefix would silently drop the card styling.
+- No code, documented function behaviour or documented number changed in this
+  version.
+
 # cs9example 26.8.5
 
 - Removed `no_data_plot()`, and with it `R/99_util_no_data_plot.R`. It was never
-  exported and never called, which is why a stale `fhi::` reference survived
-  inside it undetected for so long: the name sat in a `glue()` string, where
+  exported and never called. That is why a stale `fhi::` reference survived
+  inside it undetected for so long. The name sat in a `glue()` string, where
   static analysis cannot see it. Deleting it removes the whole class of problem
   rather than the one instance.
 - Removed `knitr` from `Suggests` and dropped the `VignetteBuilder` field. The
@@ -10,17 +25,23 @@
   the mismatch. `rmarkdown` stays in `Imports`: it is a genuine load-time
   dependency, named by a string in `assignInNamespace(ns = "rmarkdown")`.
 - `library(cs9example)` now runs with no database server and no `.Renviron`. When `CS9_DBCONFIG_ACCESS` is empty, `.onLoad()` configures a SQLite backend under `file.path(tempdir(), "cs9example")` and calls `cs9::reload_db_config()`, so both tables register against SQLite files. A `.Renviron` still wins: the defaults are only applied when the variable is empty.
-- Added a test suite. `tests/testthat/test-sqlite-roundtrip.R` asserts that both tables register, that they are backed by SQLite, that the `config` and `anon` accesses use different SQLite files, and that a synthetic row round-trips through `insert_data()` and `tbl()`. It needs no database server and no network.
+- Added a test suite that needs no database server and no network. `tests/testthat/test-sqlite-roundtrip.R` asserts four things:
+  - both tables register;
+  - SQLite backs both of them;
+  - the `config` and `anon` accesses use different SQLite files;
+  - a synthetic row round-trips through `insert_data()` and `tbl()`.
 - `README.md` no longer tells the reader to hand-write a PostgreSQL `.Renviron` before anything works.
 - `.onLoad()` now calls `utils::assignInNamespace()` rather than bare
   `assignInNamespace()`. `utils` is not attached during the minimal-namespace
-  load that `R CMD check` performs, so the bare call raised `could not find
-  function "assignInNamespace"` and failed `.onLoad()` outright. That produced
-  three WARNINGs: `checking whether the package can be loaded with stated
-  dependencies`, `checking whether the package can be unloaded cleanly` and
-  `checking whether the namespace can be loaded with stated dependencies`. All
-  three are gone. `utils` is a base-priority package, so the check does not ask
-  for it in `Imports` and it was not added there; `R/11_onAttach.R` already
+  load that `R CMD check` performs. The bare call therefore raised `could not
+  find function "assignInNamespace"`, and failed `.onLoad()` outright. That
+  produced three WARNINGs:
+  - `checking whether the package can be loaded with stated dependencies`;
+  - `checking whether the package can be unloaded cleanly`;
+  - `checking whether the namespace can be loaded with stated dependencies`.
+
+  All three are gone. `utils` is a base-priority package, so the check does not
+  ask for it in `Imports`. It was not added there. `R/11_onAttach.R` already
   called `utils::packageDescription()` on the same terms.
 - The package became loadable at all once `plnr` was fixed. `.onLoad()` calls
   `set_tasks()`, which reaches `plnr::Plan$add_analysis_from_list()`, and that
@@ -29,21 +50,23 @@
   `assignInNamespace()` defect behind it had never been seen. Fixed in plnr
   2026.8.3.
 - `DESCRIPTION` now carries `Remotes: niphr/cs9, raubreywhite/plnr`. Without it
-  CI died before `R CMD check` ever started: pak reported `Can't find package
+  CI died before `R CMD check` ever started. pak reported `Can't find package
   called cs9`, because `cs9` is in `Imports:` and is not on CRAN. `plnr` is on
   CRAN, but only at 2025.11.22, which still reads the undefined `df` in
-  `Plan$add_analysis_from_list()`. Resolving `plnr` from CRAN therefore installs
-  a version that makes `.onLoad()` die with `object 'df' not found` whenever
-  `stats` is not attached, which is exactly the condition `R CMD check` uses for
-  `checking whether the package can be loaded with stated dependencies`. Note the
-  two different owners: `cs9` is `niphr/cs9`, `plnr` is `raubreywhite/plnr`.
-  `csdb` needs no entry of its own. cs9 declares `csdb (>= 2026.8.5)` together
-  with `Remotes: niphr/csdb`, and pak follows that transitively, so `csdb`
-  resolves from GitHub at 2026.8.5 rather than the CRAN 2026.5.13.
+  `Plan$add_analysis_from_list()`. A CRAN resolution of `plnr` therefore
+  installs a version that makes `.onLoad()` die with `object 'df' not found`
+  whenever `stats` is not attached. That is exactly the condition `R CMD check`
+  uses for `checking whether the package can be loaded with stated
+  dependencies`. Note the two different owners: `cs9` is `niphr/cs9`, `plnr` is
+  `raubreywhite/plnr`. `csdb` needs no entry of its own. cs9 declares
+  `csdb (>= 2026.8.5)` together with `Remotes: niphr/csdb`, and pak follows that
+  transitively. `csdb` therefore resolves from GitHub at 2026.8.5 rather than
+  the CRAN 2026.5.13.
 - `DESCRIPTION` now declares `Config/Needs/website: niphr/cstemplate`, which was
-  missing. `_pkgdown.yml` sets `template: package: cstemplate`, cstemplate is not
-  on CRAN, and nothing else in the package named it, so the pkgdown build had no
-  template to load. The gap stayed invisible because the `pkgdown` job in
+  missing. `_pkgdown.yml` sets `template: package: cstemplate`. cstemplate is
+  not on CRAN, and nothing else in the package named it. The pkgdown build
+  therefore had no template to load. The gap stayed invisible because the
+  `pkgdown` job in
   `.github/workflows/check-and-pkgdown.yml` has `needs: R-CMD-check` and so never
   ran while dependency resolution was failing. This is a third inline GitHub ref
   with a third owner: `r-lib/actions/setup-r-dependencies` reads this field for
@@ -66,7 +89,7 @@
   raises `there is no package called` when the namespace is absent. The
   remaining `Namespace in Imports field not imported from: 'rmarkdown'` NOTE is
   the honest price of a real dependency that cannot be spelled with `::`.
-- The `DESCRIPTION` `Description:` field now ends in a full stop, which clears
+- The `DESCRIPTION` `Description:` field now ends in a full stop. That clears
   `R CMD check`'s `Malformed Description field: should contain one or more
   complete sentences.` The wording is unchanged.
 - Fixed `weather_export_plots_data_selector()`, which read `index_analysis`
@@ -76,8 +99,8 @@
   first. This was a copy from the action body with the `index_analysis <- 1`
   line dropped. The guard is FALSE under normal package use, so the defect never
   fired in production. It fired the moment a developer stepped through the data
-  selector interactively, which is the only reason the block exists: R then
-  either raised `object 'index_analysis' not found` or silently used a stale
+  selector interactively. That is the only reason the block exists. R then
+  either raised `object 'index_analysis' not found`, or silently used a stale
   value left in the global environment. Note that
   `weather_clean_data_data_selector()` is correct as written and is unchanged.
   It omits `index_analysis` from the call entirely, which is the other valid
@@ -104,7 +127,7 @@
 # cs9example 26.8.4
 
 - Added a pkgdown site: `_pkgdown.yml` on the `cstemplate` house template, an `index.md` home page, and a generated hex logo (`dev/logo.R` -> `man/figures/logo.png`).
-- Documented every exported function with a description, `@seealso` and `@family`, and added runnable examples where one can run without a database. `weather_export_plots_action()`, `make_skeleton_date()`, `make_skeleton_isoyearweek()` and `global` now have examples that execute; the five that need a live PostgreSQL database or internet access are marked `\dontrun{}` and say why.
+- Documented every exported function with a description, `@seealso` and `@family`, and added runnable examples where one can run without a database. `weather_export_plots_action()`, `make_skeleton_date()`, `make_skeleton_isoyearweek()` and `global` now have examples that execute. The five that need a live PostgreSQL database or internet access are marked `\dontrun{}` and say why.
 - `make_skeleton_date()` and `make_skeleton_isoyearweek()` are now actually exported. Both carried `@export` since they were added, but `NAMESPACE` had not been regenerated, so neither was reachable as `cs9example::make_skeleton_date()`.
 
 ## Development

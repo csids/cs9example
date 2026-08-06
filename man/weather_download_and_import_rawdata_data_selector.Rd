@@ -16,8 +16,8 @@ A named list with one element, \code{data}: the parsed forecast.
 }
 \description{
 Takes the mean latitude and longitude of the municipality named in
-\code{argset$location_code}, then downloads the MET Norway location forecast for
-that point. Returns it under the name \code{data}.
+\code{argset$location_code}. Downloads the MET Norway location forecast for that
+point. Returns it under the name \code{data}.
 }
 \examples{
 \dontrun{
