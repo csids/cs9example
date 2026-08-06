@@ -1,7 +1,7 @@
 # weather_clean_data (data selector)
 
 Pulls the daily, municipality-level, total-age, total-sex rows out of
-`anon_example_weather_rawdata` and returns them under the name
+`anon_example_weather_rawdata`. Returns them under the name
 `date_municip`, ordered by location and date.
 
 ## Usage

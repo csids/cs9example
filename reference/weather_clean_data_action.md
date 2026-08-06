@@ -1,11 +1,12 @@
 # weather_clean_data (action)
 
 Lays out a complete municipality-by-date skeleton with
-[`make_skeleton_date()`](https://niphr.github.io/cs9example/reference/make_skeleton_date.md),
-merges the raw weather onto it, aggregates it up to county and to
-nation, and aggregates the whole lot up again to ISO year-week. Both
-granularities are formatted as csfmt_rts_data_v2, stacked, and written
-to `anon_example_weather_data`, replacing whatever was there.
+[`make_skeleton_date()`](https://niphr.github.io/cs9example/reference/make_skeleton_date.md).
+Merges the raw weather onto that skeleton. Aggregates it up to county
+and to nation. Aggregates the whole lot up again to ISO year-week. The
+action formats both granularities as csfmt_rts_data_v2, stacks them, and
+writes them to `anon_example_weather_data`. The write replaces whatever
+was there.
 
 ## Usage
 

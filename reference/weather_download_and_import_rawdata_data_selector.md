@@ -1,8 +1,8 @@
 # weather_download_and_import_rawdata (data selector)
 
 Takes the mean latitude and longitude of the municipality named in
-`argset$location_code`, then downloads the MET Norway location forecast
-for that point. Returns it under the name `data`.
+`argset$location_code`. Downloads the MET Norway location forecast for
+that point. Returns it under the name `data`.
 
 ## Usage
 

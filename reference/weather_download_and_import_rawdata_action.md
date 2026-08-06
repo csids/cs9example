@@ -2,8 +2,8 @@
 
 Keeps the 00, 06, 12 and 18 o'clock timepoints of the forecast that
 [`weather_download_and_import_rawdata_data_selector()`](https://niphr.github.io/cs9example/reference/weather_download_and_import_rawdata_data_selector.md)
-returned, reduces them to one row per date (maximum and minimum air
-temperature, total precipitation) and upserts those rows into
+returned. Reduces them to one row per date: maximum air temperature,
+minimum air temperature and total precipitation. Upserts those rows into
 `anon_example_weather_rawdata`.
 
 ## Usage

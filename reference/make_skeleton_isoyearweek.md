@@ -1,7 +1,7 @@
 # Create ISO Year-Week Data Skeleton
 
-Creates a comprehensive data skeleton with complete ISO year-week
-sequences and location codes for specified geographic granularities.
+Creates a data skeleton with complete ISO year-week sequences and
+location codes for the geographic granularities you specify.
 
 ## Usage
 

@@ -1,7 +1,7 @@
 # weather_export_plots (data selector)
 
 Pulls every row of `anon_example_weather_data` for the location named in
-`argset$location_code` and returns the date, `temp_max` and `temp_min`
+`argset$location_code`. Returns the `date`, `temp_max` and `temp_min`
 columns under the name `data`, ordered by date.
 
 ## Usage
