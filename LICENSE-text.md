@@ -1,4 +1,4 @@
 # License
 
-    YEAR: 2021
-    COPYRIGHT HOLDER: cs9example authors
+    YEAR: 2026
+    COPYRIGHT HOLDER: Folkehelseinstituttet
