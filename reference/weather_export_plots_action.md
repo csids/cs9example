@@ -68,5 +68,5 @@ weather_export_plots_action(data = d, argset = argset, tables = NULL)
 #> Saving 6.67 x 6.67 in image
 #> NULL
 fs::dir_ls(argset$output_dir)
-#> /tmp/RtmpAtRDES/cs9example-plots/weather_county_nor03.png
+#> /tmp/RtmpN8b9Dx/cs9example-plots/weather_county_nor03.png
 ```

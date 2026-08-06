@@ -2,10 +2,16 @@
 
 ## cs9example 26.8.6
 
+- Fixed two `README.md` links that pointed at `www.csids.no`. The
+  introduction vignette link returned 404 there. Both now point at
+  `niphr.github.io`, which is the URL cs9’s own `DESCRIPTION` and
+  `_pkgdown.yml` declare, and which returns 200.
+
 - Brought the prose in `R/`, `README.md`, `index.md` and `NEWS.md` to
   the house standard: ASD-STE100 (Simplified Technical English),
   adapted. Split the long sentences, and turned the buried lists into
   real lists.
+
   - Sentences over 25 words, measured per authored unit, before and
     after: `R/` 4 to 0, `README.md` 1 to 0, `NEWS.md` 12 to 0.
     `index.md` was already at 0.
@@ -14,6 +20,7 @@
   - `index.md` keeps the `cs-*` class names, which are the ones
     `cstemplate` defines. An `rw-*` prefix would silently drop the card
     styling.
+
 - No code, documented function behaviour or documented number changed in
   this version.
 
