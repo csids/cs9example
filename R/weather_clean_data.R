@@ -24,6 +24,8 @@
 #' }
 #' @export
 weather_clean_data_action <- function(data, argset, tables) {
+  # NSE column names, declared so R CMD check does not read them as undefined globals
+  age <- border <- granularity_geo <- granularity_time <- isoyearweek <- location_code <- precip <- sex <- temp_max <- temp_min <- to_code <- NULL
   # cs9::run_task_sequentially_as_rstudio_job_using_load_all("weather_clean_data")
   # To be run outside of rstudio: cs9example::global$ss$run_task("weather_clean_data")
 
@@ -200,6 +202,8 @@ weather_clean_data_action <- function(data, argset, tables) {
 #' }
 #' @export
 weather_clean_data_data_selector <- function(argset, tables) {
+  # NSE column names, declared so R CMD check does not read them as undefined globals
+  granularity_time <- location_code <- precip <- temp_max <- temp_min <- NULL
   if (plnr::is_run_directly()) {
     # global$ss$shortcut_get_plans_argsets_as_dt("weather_clean_data")
 

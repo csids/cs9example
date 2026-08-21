@@ -1,6 +1,6 @@
 Package: cs9example
 Title: A skeleton implementation of cs9 (Core Surveillance 9)
-Version: 26.8.22
+Version: 26.8.23
 Authors@R:
     c(
       person(

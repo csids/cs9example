@@ -23,26 +23,11 @@
 #' @import data.table
 1
 
-# data.table and dplyr use non-standard evaluation, so column names referenced
-# inside `[...]` and inside dplyr::select() look like undefined globals to
-# R CMD check. Declaring them here keeps "checking R code for possible
-# problems" clean without touching the code.
-utils::globalVariables(c(
-  ".",
-  "age",
-  "border",
-  "granularity_geo",
-  "granularity_time",
-  "isoyearweek",
-  "lat",
-  "location_code",
-  "long",
-  "precip",
-  "sex",
-  "temp_max",
-  "temp_min",
-  "to_code"
-))
+# "." is data.table's alias for list(), as in d[, .(x = ...)]. R CMD check reads
+# it as an undefined function, and no local binding fixes that, so it is declared
+# here. Every other NSE name is declared as NULL at the top of the one function
+# that uses it.
+utils::globalVariables(".")
 
 #' Declaration of environments that can be used globally
 #'

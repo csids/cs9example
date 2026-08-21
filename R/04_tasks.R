@@ -14,6 +14,8 @@
 # ******************************************************************************
 
 set_tasks <- function() {
+  # NSE column names, declared so R CMD check does not read them as undefined globals
+  granularity_geo <- NULL
   # __________ ----
   # Weather  ----
   ## > weather_download_and_import_rawdata ----

@@ -38,6 +38,8 @@
 #' fs::dir_ls(argset$output_dir)
 #' @export
 weather_export_plots_action <- function(data, argset, tables) {
+  # NSE column names, declared so R CMD check does not read them as undefined globals
+  temp_max <- temp_min <- NULL
   # cs9::run_task_sequentially_as_rstudio_job_using_load_all("weather_export_plots")
   # To be run outside of rstudio: cs9example::global$ss$run_task("weather_export_plots")
 
@@ -106,6 +108,8 @@ weather_export_plots_action <- function(data, argset, tables) {
 #' }
 #' @export
 weather_export_plots_data_selector <- function(argset, tables) {
+  # NSE column names, declared so R CMD check does not read them as undefined globals
+  temp_max <- temp_min <- NULL
   if (plnr::is_run_directly()) {
     # global$ss$shortcut_get_plans_argsets_as_dt("weather_export_plots")
 

@@ -22,6 +22,8 @@
 #' }
 #' @export
 weather_download_and_import_rawdata_action <- function(data, argset, tables) {
+  # NSE column names, declared so R CMD check does not read them as undefined globals
+  age <- border <- granularity_time <- location_code <- sex <- NULL
   # cs9::run_task_sequentially_as_rstudio_job_using_load_all("weather_download_and_import_rawdata")
   # To be run outside of rstudio: cs9example::global$ss$run_task("weather_download_and_import_rawdata")
 
@@ -128,6 +130,8 @@ weather_download_and_import_rawdata_action <- function(data, argset, tables) {
 #' }
 #' @export
 weather_download_and_import_rawdata_data_selector <- function(argset, tables) {
+  # NSE column names, declared so R CMD check does not read them as undefined globals
+  lat <- location_code <- long <- NULL
   if (plnr::is_run_directly()) {
     # sc::tm_get_plans_argsets_as_dt("weather_download_and_import_rawdata")
 

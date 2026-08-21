@@ -119,6 +119,8 @@ make_skeleton_isoyearweek <- function(
   granularity_geo,
   location_reference = csdata::nor_locations_names()
 ) {
+  # NSE column names, declared so R CMD check does not read them as undefined globals
+  isoyearweek <- NULL
   # Input validation
   if (
     missing(isoyearweek_min) ||
