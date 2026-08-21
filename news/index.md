@@ -1,5 +1,17 @@
 # Changelog
 
+## Version 26.8.23
+
+- The 14-name
+  [`utils::globalVariables()`](https://rdrr.io/r/utils/globalVariables.html)
+  list is gone. Each NSE column name is now declared as `NULL` at the
+  top of the one function that uses it: 8 declarations across 5 files.
+  Only `.` stays package-wide.
+- `R CMD check` named five columns the old list never declared at all:
+  `temp_max`, `temp_min`, `precip`, `lat` and `long`, plus `to_code`.
+  They were reaching the check clean for another reason, so the list was
+  not doing the job it appeared to do.
+
 ## Version 26.8.22
 
 - The package drops `magrittr`. Every `%>%` is now the base pipe `|>`,
