@@ -1,6 +1,6 @@
 Package: cs9example
 Title: A skeleton implementation of cs9 (Core Surveillance 9)
-Version: 26.8.6
+Version: 26.8.21
 Authors@R:
     c(
       person(
@@ -37,6 +37,7 @@ Imports:
     glue,
     httr,
     plnr,
+    progress,
     progressr,
     stringr
 Suggests:
