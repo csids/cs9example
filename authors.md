@@ -18,12 +18,13 @@ Source:
 [`DESCRIPTION`](https://github.com/csids/cs9/blob/main/DESCRIPTION)
 
 White RA (2026). *cs9example: A skeleton implementation of cs9 (Core
-Surveillance 9)*. R package version 26.8.6, <https://www.csids.no/cs9/>.
+Surveillance 9)*. R package version 26.8.21,
+<https://www.csids.no/cs9/>.
 
     @Manual{,
       title = {cs9example: A skeleton implementation of cs9 (Core Surveillance 9)},
       author = {Richard Aubrey White},
       year = {2026},
-      note = {R package version 26.8.6},
+      note = {R package version 26.8.21},
       url = {https://www.csids.no/cs9/},
     }

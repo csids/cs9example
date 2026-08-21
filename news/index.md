@@ -1,5 +1,20 @@
 # Changelog
 
+## Version 26.8.21
+
+- `progress` is now declared. `.onLoad` calls
+  [`progressr::handler_progress()`](https://progressr.futureverse.org/reference/handler_progress.html),
+  whose body calls
+  [`progress::progress_bar`](http://r-lib.github.io/progress/reference/progress_bar.md),
+  so this package needs it at load time. It worked only because `cs9`
+  declares it and this package imports `cs9`. It would have broken the
+  day `cs9` stopped needing it.
+- `R/zzz_imports.R` names `rmarkdown` and `progress`, which clears the
+  declared-but-unused note. Neither is visible to the dependency scan.
+  `rmarkdown` is named as a string, in
+  `utils::assignInNamespace(..., ns = "rmarkdown")`, and `progress` is
+  reached through another package’s function body.
+
 ## cs9example 26.8.6
 
 ### Licensing
