@@ -213,7 +213,7 @@ weather_clean_data_data_selector <- function(argset, tables) {
   }
 
   # The database tabless can be accessed here
-  d <- tables$anon_example_weather_rawdata$tbl() %>%
+  d <- tables$anon_example_weather_rawdata$tbl() |>
     cs9::mandatory_db_filter(
       granularity_time = "date",
       granularity_time_not = NULL,
@@ -225,7 +225,7 @@ weather_clean_data_data_selector <- function(argset, tables) {
       age_not = NULL,
       sex = "total",
       sex_not = NULL
-    ) %>%
+    ) |>
     dplyr::select(
       granularity_time,
       # granularity_geo,
@@ -250,9 +250,9 @@ weather_clean_data_data_selector <- function(argset, tables) {
       temp_max,
       temp_min,
       precip
-    ) %>%
-    dplyr::collect() %>%
-    as.data.table() %>%
+    ) |>
+    dplyr::collect() |>
+    as.data.table() |>
     setorder(
       location_code,
       date

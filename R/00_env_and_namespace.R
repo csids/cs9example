@@ -4,7 +4,7 @@
 # 00_env_and_namespace.R
 #
 # PURPOSE 1:
-#   Use roxygen2 to import ggplot2, data.table, %>%, and %<>% into the namespace,
+#   Use roxygen2 to import ggplot2 and data.table into the namespace,
 #   because these are the most commonly used packages/functions.
 #
 # PURPOSE 2:
@@ -21,7 +21,6 @@
 
 #' @import ggplot2
 #' @import data.table
-#' @importFrom magrittr %>% %<>%
 1
 
 # data.table and dplyr use non-standard evaluation, so column names referenced

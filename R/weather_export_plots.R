@@ -121,7 +121,7 @@ weather_export_plots_data_selector <- function(argset, tables) {
   }
 
   # The database tables can be accessed here
-  d <- tables$anon_example_weather_data$tbl() %>%
+  d <- tables$anon_example_weather_data$tbl() |>
     cs9::mandatory_db_filter(
       granularity_time = NULL,
       granularity_time_not = NULL,
@@ -133,7 +133,7 @@ weather_export_plots_data_selector <- function(argset, tables) {
       age_not = NULL,
       sex = NULL,
       sex_not = NULL
-    ) %>%
+    ) |>
     dplyr::select(
       # granularity_time,
       # granularity_geo,
@@ -157,9 +157,9 @@ weather_export_plots_data_selector <- function(argset, tables) {
 
       temp_max,
       temp_min
-    ) %>%
-    dplyr::collect() %>%
-    as.data.table() %>%
+    ) |>
+    dplyr::collect() |>
+    as.data.table() |>
     setorder(
       # location_code,
       date

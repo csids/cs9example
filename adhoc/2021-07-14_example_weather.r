@@ -1,5 +1,4 @@
 library(cs9example)
-library(magrittr)
 library(data.table)
 
 d <- sc::tbl("anon_example_weather_data") |>

@@ -1,6 +1,6 @@
 Package: cs9example
 Title: A skeleton implementation of cs9 (Core Surveillance 9)
-Version: 26.8.21
+Version: 26.8.22
 Authors@R:
     c(
       person(
@@ -27,7 +27,6 @@ Imports:
     csdata,
     fs,
     ggplot2,
-    magrittr,
     rmarkdown,
     cs9,
     csdb,
